@@ -1,16 +1,34 @@
-import { nanoid } from 'nanoid'
-import React, { useState } from 'react'
 import "./App.css"
-import data from "./mock-data.json" //pretend we call an api
+import { nanoid } from 'nanoid'
+import React, { useState, useEffect } from 'react'
+// import data from "./mock-data.json" //pretend we call an api
+import { auth, db } from "./initFirebase"
+import { ref, push, set, onValue, getDatabase } from "firebase/database"
+
 
 const App = () => {
-  const [contacts, setContacts] = useState(data)
+  const listsRef = ref(db, 'Lists') //Getting a reference to 'Lists' in Firebase-RT-DB
+  const [contacts, setContacts] = useState([])
   const [addFormData, setAddFormData] = useState({
     fullName: '',
     address: '',
     phoneNumber: '',
     email: ''
   })
+
+  //Loading data from Firebase-Realtime-Database
+  useEffect(() => {
+    onValue(listsRef, (snapshot) => {
+      const jsonObject = snapshot.val() //Getting each child value under 'Lists' as a json object
+      try{
+        const listObject = Object.values(jsonObject) //Convert a json object to a list of jsons
+        setContacts(listObject) //Updating state: 'contacts' using setContacts
+      }
+      catch{
+        console.log("Database is empty")
+      }
+    })
+  }, [])
 
   const handleAddFormChange = (event) => {
     event.preventDefault()
@@ -26,17 +44,23 @@ const App = () => {
 
   const handleAddFormSubmit = (event) => {
     event.preventDefault()
-
     const newContact = {
-      id: nanoid(), //generates an id
+      id: nanoid(), //Generates an id
       fullName: addFormData.fullName,
       address: addFormData.address,
       phoneNumber: addFormData.phoneNumber,
       email: addFormData.email
     }
 
-    const newContacts = [...contacts, newContact]
-    setContacts(newContacts)
+    //Inserting new object to Firebase-RT-DB
+    const newChildRef = push(listsRef); //Generating new child under 'Lists'
+    set(newChildRef, newContact); //Setting new object into the new child (newChildRef)
+
+    onValue(listsRef, (snapshot) => {
+      const jsonObject = snapshot.val() //Getting each child value under 'Lists' as a json object
+      const listObject = Object.values(jsonObject) //Convert a json object to a list of jsons
+      setContacts(listObject) //Updating state: 'contacts' using setContacts
+    })
   }
 
   return (
@@ -52,7 +76,7 @@ const App = () => {
         </thead>
         <tbody>
           {contacts.map((contact) =>
-            <tr>
+            <tr key={contact.id}>
               <td>{contact.fullName}</td>
               <td>{contact.address}</td>
               <td>{contact.phoneNumber}</td>
@@ -72,7 +96,7 @@ const App = () => {
           type="text"
           name="address"
           required="required"
-          placeholder="Enter an address..." 
+          placeholder="Enter an address..."
           onChange={handleAddFormChange} />
         <input
           type="text"
@@ -84,10 +108,10 @@ const App = () => {
           type="email"
           name="email"
           required="required"
-          placeholder="Enter an email..." 
+          placeholder="Enter an email..."
           onChange={handleAddFormChange} />
-        
-        <button type="submit" onClick={handleAddFormSubmit}>Add</button>
+
+        <button type="reset" onClick={handleAddFormSubmit}>Add</button>
       </form>
     </div>
   )
