@@ -1,8 +1,7 @@
-import "./App.css"
+import "../App.css"
 import { nanoid } from 'nanoid'
 import React, { useState, useEffect } from 'react'
-// import data from "./mock-data.json" //pretend we call an api
-import { db } from "./initFirebase"
+import { db } from "../initFirebase"
 import { ref, push, set, onValue } from "firebase/database"
 
 
