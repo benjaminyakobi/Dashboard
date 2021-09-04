@@ -1,8 +1,14 @@
-.app-container {
+.table-container {
   display: flex;
   flex-direction: column;
   gap: 10px;
   padding: 1rem;
+}
+
+.signup-container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 table {
@@ -26,7 +32,7 @@ td {
   background-color: rgb(205, 235, 253);
 }
 
-form {
+.form-container {
   display: flex;
   gap: 5px;
 }
