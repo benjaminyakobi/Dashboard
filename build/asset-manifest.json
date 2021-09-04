@@ -1,22 +1,23 @@
 {
   "files": {
-    "main.css": "/static/css/main.078d58f1.chunk.css",
-    "main.js": "/static/js/main.180aa057.chunk.js",
-    "main.js.map": "/static/js/main.180aa057.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.75168c4e.js",
-    "runtime-main.js.map": "/static/js/runtime-main.75168c4e.js.map",
-    "static/js/2.f2637d3f.chunk.js": "/static/js/2.f2637d3f.chunk.js",
-    "static/js/2.f2637d3f.chunk.js.map": "/static/js/2.f2637d3f.chunk.js.map",
-    "static/js/3.bb53eb0e.chunk.js": "/static/js/3.bb53eb0e.chunk.js",
-    "static/js/3.bb53eb0e.chunk.js.map": "/static/js/3.bb53eb0e.chunk.js.map",
+    "main.css": "/static/css/main.ef634297.chunk.css",
+    "main.js": "/static/js/main.35b5ed5d.chunk.js",
+    "main.js.map": "/static/js/main.35b5ed5d.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.dfade9bb.js",
+    "runtime-main.js.map": "/static/js/runtime-main.dfade9bb.js.map",
+    "static/css/2.818011ed.chunk.css": "/static/css/2.818011ed.chunk.css",
+    "static/js/2.04c59420.chunk.js": "/static/js/2.04c59420.chunk.js",
+    "static/js/2.04c59420.chunk.js.map": "/static/js/2.04c59420.chunk.js.map",
     "index.html": "/index.html",
-    "static/css/main.078d58f1.chunk.css.map": "/static/css/main.078d58f1.chunk.css.map",
-    "static/js/2.f2637d3f.chunk.js.LICENSE.txt": "/static/js/2.f2637d3f.chunk.js.LICENSE.txt"
+    "static/css/2.818011ed.chunk.css.map": "/static/css/2.818011ed.chunk.css.map",
+    "static/css/main.ef634297.chunk.css.map": "/static/css/main.ef634297.chunk.css.map",
+    "static/js/2.04c59420.chunk.js.LICENSE.txt": "/static/js/2.04c59420.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.75168c4e.js",
-    "static/js/2.f2637d3f.chunk.js",
-    "static/css/main.078d58f1.chunk.css",
-    "static/js/main.180aa057.chunk.js"
+    "static/js/runtime-main.dfade9bb.js",
+    "static/css/2.818011ed.chunk.css",
+    "static/js/2.04c59420.chunk.js",
+    "static/css/main.ef634297.chunk.css",
+    "static/js/main.35b5ed5d.chunk.js"
   ]
 }
