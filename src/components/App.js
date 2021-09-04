@@ -5,6 +5,7 @@ import { db } from "../initFirebase"
 import { ref, push, set, onValue } from "firebase/database"
 import Signup from "./Signup"
 import { Container } from "react-bootstrap"
+import { AuthProvider } from "./contexts/AuthContext"
 
 const App = () => {
   const listsRef = ref(db, 'Lists') //Getting a reference to 'Lists' in Firebase-RT-DB
@@ -65,12 +66,14 @@ const App = () => {
 
   return (
     <>
-      <Container className='signup-container'>
+      <AuthProvider>
+        <Container className='signup-container'>
           <div className='w-100' style={{ maxWidth: '400px' }}>
             <Signup />
           </div>
-      </Container>
-
+        </Container>
+      </AuthProvider>
+      
       <div className="table-container">
         <table>
           <thead>
