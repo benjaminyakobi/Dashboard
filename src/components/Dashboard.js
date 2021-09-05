@@ -78,7 +78,6 @@ const Dashboard = () => {
     } catch {
       setError('Failed to log out')
     }
-
   }
 
   return (
@@ -86,7 +85,7 @@ const Dashboard = () => {
       <Card>
         <Card.Body className='text-center mt-2'>
           <h6>Email: {currentUser.email}</h6>
-          <Link to='/update'>Update</Link>
+          <Link to='/update-email'>Update Email/Password</Link>
           <div>
             <Button variant='link' onClick={handleLogout}>Log Out</Button>
           </div>
