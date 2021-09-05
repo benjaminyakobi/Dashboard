@@ -1,11 +1,17 @@
 import React, { createContext, useContext, useState, useEffect } from 'react'
 import { auth } from '../../initFirebase'
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth"
 
 const AuthContext = createContext()
 
 export function useAuth() {
     return useContext(AuthContext)
+    // In order to use AuthContext.Provider value (i.e. AuthContext.Consumer)
+    // we have to export it as: useContext(AuthContext) because we're using 
+    // Functional Components. These way is relevent ONLY for functional components
+    // and in class components we just use AuthContext.Consumer
+    // WE PASS Context INSIDE useContext -> WE GET THE VALUE OF THE Inner-Context
+    // Detailed explain: https://www.youtube.com/watch?v=5LrDIWkK_Bc
 }
 
 export function AuthProvider({ children }) {
@@ -13,7 +19,15 @@ export function AuthProvider({ children }) {
     const [loading, setLoading] = useState(true)
 
     function signup(email, password) {
-        createUserWithEmailAndPassword(auth, email, password)
+        return createUserWithEmailAndPassword(auth, email, password)
+    }
+
+    function login(email, password) {
+        return signInWithEmailAndPassword(auth, email, password)
+    }
+
+    function logout() {
+        signOut(auth)
     }
 
     useEffect(() => {
@@ -28,7 +42,9 @@ export function AuthProvider({ children }) {
 
     const value = {
         currentUser,
-        signup
+        signup,
+        login,
+        logout
     }
     return (
         <AuthContext.Provider value={value}>

@@ -3,9 +3,13 @@ import { nanoid } from 'nanoid'
 import React, { useState, useEffect } from 'react'
 import { db } from "../initFirebase"
 import { ref, push, set, onValue } from "firebase/database"
-import Signup from "./Signup"
 import { Container } from "react-bootstrap"
 import { AuthProvider } from "./contexts/AuthContext"
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
+import Login from "./Login"
+import Signup from "./Signup"
+import Dashboard from './Dashboard'
+import PrivateRoute from "./PrivateRoute"
 
 const App = () => {
   const listsRef = ref(db, 'Lists') //Getting a reference to 'Lists' in Firebase-RT-DB
@@ -65,66 +69,21 @@ const App = () => {
   }
 
   return (
-    <>
-      <AuthProvider>
-        <Container className='signup-container'>
-          <div className='w-100' style={{ maxWidth: '400px' }}>
-            <Signup />
-          </div>
-        </Container>
-      </AuthProvider>
-      
-      <div className="table-container">
-        <table>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Address</th>
-              <th>Phone Number</th>
-              <th>Email</th>
-            </tr>
-          </thead>
-          <tbody>
-            {contacts.map((contact) =>
-              <tr key={contact.id}>
-                <td>{contact.fullName}</td>
-                <td>{contact.address}</td>
-                <td>{contact.phoneNumber}</td>
-                <td>{contact.email}</td>
-              </tr>)}
-          </tbody>
-        </table>
-        <h2>Add a Contact</h2>
-        <form className='form-container'>
-          <input
-            type="text"
-            name="fullName"
-            required="required"
-            placeholder="Enter a name..."
-            onChange={handleAddFormChange} />
-          <input
-            type="text"
-            name="address"
-            required="required"
-            placeholder="Enter an address..."
-            onChange={handleAddFormChange} />
-          <input
-            type="text"
-            name="phoneNumber"
-            required="required"
-            placeholder="Enter a phone number..."
-            onChange={handleAddFormChange} />
-          <input
-            type="email"
-            name="email"
-            required="required"
-            placeholder="Enter an email..."
-            onChange={handleAddFormChange} />
-
-          <button type="reset" onClick={handleAddFormSubmit}>Add</button>
-        </form>
-      </div>
-    </>
+    <AuthProvider>
+      <Container className='signup-container'>
+        <div className='w-100' style={{ maxWidth: '400px' }}>
+          <Router>
+            <AuthProvider>
+              <Switch>
+                <PrivateRoute path='/dashboard' component={Dashboard} />
+                <Route path='/signup' component={Signup} />
+                <Route exact path='/' component={Login} />
+              </Switch>
+            </AuthProvider>
+          </Router>
+        </div>
+      </Container>
+    </AuthProvider>
   )
 }
 
