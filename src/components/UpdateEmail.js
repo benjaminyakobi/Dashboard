@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react'
 import { Form, Button, Card, Alert } from 'react-bootstrap'
 import { useAuth } from '../components/contexts/AuthContext'
 import { Link, useHistory } from 'react-router-dom'
-import { updateEmail } from 'firebase/auth'
+// import { updateEmail } from 'firebase/auth'
 
 export default function UpdateEmail() {
     const emailRef = useRef()

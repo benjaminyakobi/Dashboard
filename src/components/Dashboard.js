@@ -3,7 +3,7 @@ import { nanoid } from 'nanoid'
 import React, { useState, useEffect } from 'react'
 import { db } from "../initFirebase"
 import { ref, push, set, onValue } from "firebase/database"
-import { updateCurrentUser } from "firebase/auth"
+// import { updateCurrentUser } from "firebase/auth"
 import { useAuth } from './contexts/AuthContext'
 import { Button, Card } from 'react-bootstrap'
 import { Link, useHistory } from 'react-router-dom'
@@ -28,11 +28,14 @@ const Dashboard = () => {
     onValue(listsRef, (snapshot) => {
       const jsonObject = snapshot.val() //Getting each child value under 'Lists' as a json object
       try {
+        
+        setError('')
         const listObject = Object.values(jsonObject) //Convert a json object to a list of jsons
         setContacts(listObject) //Updating state: 'contacts' using setContacts
       }
       catch {
-        console.log("Database is empty")
+        setError("Database is empty")
+        console.log(error)
       }
     })
   }, [])
@@ -77,6 +80,7 @@ const Dashboard = () => {
       history.push('/')
     } catch {
       setError('Failed to log out')
+      console.log(error)
     }
   }
 

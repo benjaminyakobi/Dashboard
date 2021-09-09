@@ -1,8 +1,9 @@
 import "../App.css"
-import { nanoid } from 'nanoid'
-import React, { useState, useEffect } from 'react'
-import { db } from "../initFirebase"
-import { ref, push, set, onValue } from "firebase/database"
+// import { nanoid } from 'nanoid'
+// import React, { useState, useEffect } from 'react'
+import React from 'react'
+// import { db } from "../initFirebase"
+// import { ref, push, set, onValue } from "firebase/database"
 import { Container } from "react-bootstrap"
 import { AuthProvider } from "./contexts/AuthContext"
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
@@ -22,10 +23,10 @@ const App = () => {
             <AuthProvider>
               <Switch>
                 <PrivateRoute path='/dashboard' component={Dashboard} />
-                <Route path='/signup' component={Signup} />
-                <Route exact path='/' component={Login} />
-                <Route path='/forgot-password' component={ForgotPassword} />
-                <Route path='/update-email' component={UpdateEmail} />
+                  <Route path='/signup' component={Signup} />
+                  <Route exact path='/' component={Login} />
+                  <Route path='/forgot-password' component={ForgotPassword} />
+                  <Route path='/update-email' component={UpdateEmail} />
               </Switch>
             </AuthProvider>
           </Router>
