@@ -17,8 +17,8 @@ import UpdateEmail from "./UpdateEmail"
 const App = () => {
   return (
     <AuthProvider>
-      <Container className='signup-container'>
-        <div className='w-100' style={{ maxWidth: '400px' }}>
+      <Container>
+        <div style={{ width: '400px' }}>
           <Router>
             <AuthProvider>
               <Switch>

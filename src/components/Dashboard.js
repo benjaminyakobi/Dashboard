@@ -5,7 +5,7 @@ import { db } from "../initFirebase"
 import { ref, push, set, onValue } from "firebase/database"
 // import { updateCurrentUser } from "firebase/auth"
 import { useAuth } from './contexts/AuthContext'
-import { Button, Card } from 'react-bootstrap'
+import { Button, Card, Container } from 'react-bootstrap'
 import { Link, useHistory } from 'react-router-dom'
 
 
@@ -85,7 +85,7 @@ const Dashboard = () => {
 
   return (
     <>
-      <Card>
+    <Card>
         <Card.Body className='text-center mt-2'>
           <h6>Email: {currentUser.email}</h6>
           <Link to='/update-email'>Update Email/Password</Link>
@@ -95,7 +95,7 @@ const Dashboard = () => {
         </Card.Body>
       </Card>
 
-      <div className="table-container">
+      <div style={{ width: '1000px', text: 'center', marginTop: 6 }}>
         <table>
           <thead>
             <tr>
@@ -115,6 +115,8 @@ const Dashboard = () => {
               </tr>)}
           </tbody>
         </table>
+      </div>
+      <div>
         <h2>Add a Contact</h2>
         <form className='form-container'>
           <input
@@ -141,7 +143,6 @@ const Dashboard = () => {
             required="required"
             placeholder="Enter an email..."
             onChange={handleAddFormChange} />
-
           <button type="reset" onClick={handleAddFormSubmit}>Add</button>
         </form>
       </div>

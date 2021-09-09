@@ -1,8 +1,7 @@
 .table-container {
   display: flex;
-  flex-direction: column;
-  gap: 10px;
-  padding: 1rem;
+  align-items: left;
+  justify-content: left;
 }
 
 .signup-container{
@@ -11,10 +10,10 @@
   justify-content: center;
 }
 
-table {
+/* table {
   border-collapse: collapse;
   width: 100%;
-}
+} */
 
 th,
 td {
