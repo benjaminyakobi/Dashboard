@@ -18,12 +18,11 @@ export default function Login() {
             setError('')
             setLoading(true)
             await login(emailRef.current.value, passwordRef.current.value) //if the login fails -> go to catch block
+            setLoading(false)
             history.push('/dashboard')
-
         } catch {
             setError('Failed to log in')
         }
-        setLoading(false)
     }
     return (
         <>

@@ -28,7 +28,6 @@ const Dashboard = () => {
     onValue(listsRef, (snapshot) => {
       const jsonObject = snapshot.val() //Getting each child value under 'Lists' as a json object
       try {
-        
         setError('')
         const listObject = Object.values(jsonObject) //Convert a json object to a list of jsons
         setContacts(listObject) //Updating state: 'contacts' using setContacts
