@@ -17,16 +17,16 @@ import UpdateEmail from "./UpdateEmail"
 const App = () => {
   return (
     <AuthProvider>
-      <Container>
+      <Container style={{ width: 'auto' }}>
         <div style={{ width: '400px' }}>
           <Router>
             <AuthProvider>
               <Switch>
                 <PrivateRoute path='/dashboard' component={Dashboard} />
-                  <Route path='/signup' component={Signup} />
-                  <Route exact path='/' component={Login} />
-                  <Route path='/forgot-password' component={ForgotPassword} />
-                  <Route path='/update-email' component={UpdateEmail} />
+                <Route path='/signup' component={Signup} />
+                <Route exact path='/' component={Login} />
+                <Route path='/forgot-password' component={ForgotPassword} />
+                <Route path='/update-email' component={UpdateEmail} />
               </Switch>
             </AuthProvider>
           </Router>

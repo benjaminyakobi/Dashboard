@@ -85,7 +85,7 @@ const Dashboard = () => {
 
   return (
     <>
-    <Card>
+      <Card>
         <Card.Body className='text-center mt-2'>
           <h6>Email: {currentUser.email}</h6>
           <Link to='/update-email'>Update Email/Password</Link>
@@ -95,7 +95,7 @@ const Dashboard = () => {
         </Card.Body>
       </Card>
 
-      <div style={{ width: '1000px', text: 'center', marginTop: 6 }}>
+      <div style={{ width: '800px', marginTop: 6 }}>
         <table>
           <thead>
             <tr>
@@ -116,8 +116,8 @@ const Dashboard = () => {
           </tbody>
         </table>
       </div>
-      <div>
-        <h2>Add a Contact</h2>
+      <div style={{ width: '800px', marginTop: 6 }}>
+        <h3>Add a Contact</h3>
         <form className='form-container'>
           <input
             type="text"
