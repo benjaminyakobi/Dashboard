@@ -25,7 +25,7 @@ const Dashboard = () => {
   })
 
 
-  {/* FIREBASE REALTIME DATABASE */ }
+  /* FIREBASE REALTIME DATABASE */ 
   //Loading data from Firebase-Realtime-Database
   useEffect(() => {
     onValue(listsRef, (snapshot) => {
@@ -53,7 +53,7 @@ const Dashboard = () => {
     }
   }
 
-  {/* ADDING DATA TO FIREBASE RTDB */ }
+  /* ADDING DATA TO FIREBASE RTDB */ 
   const handleAddFormSubmit = (event) => {
     event.preventDefault()
     const newContact = {
@@ -92,7 +92,7 @@ const Dashboard = () => {
     setAddFormData(newFormData)
   }
 
-  {/* EDDITING DATA IN FIREBASE RTDB */ }
+  /* EDDITING DATA IN FIREBASE RTDB */ 
   const HandleEditFormSubmit = (event) => {
     event.preventDefault()
 
@@ -153,7 +153,7 @@ const Dashboard = () => {
     setEditContactId(null)
   }
 
-  {/* DELETE DATA FROM FIREBASE RTDB */ }
+  /* DELETE DATA FROM FIREBASE RTDB */ 
   const handleDeleteClick = (contactId) => {
     get(listsRef)
       .then(snapshot => {
