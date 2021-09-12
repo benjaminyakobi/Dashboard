@@ -1,12 +1,14 @@
 import "../App.css"
 import { nanoid } from 'nanoid'
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, Fragment } from 'react'
 import { db } from "../initFirebase"
-import { ref, push, set, onValue } from "firebase/database"
+import { ref, push, child, set, update, onValue, get } from "firebase/database"
 // import { updateCurrentUser } from "firebase/auth"
 import { useAuth } from './contexts/AuthContext'
-import { Button, Card, Container } from 'react-bootstrap'
+import { Button, Card } from 'react-bootstrap'
 import { Link, useHistory } from 'react-router-dom'
+import ReadOnlyRow from "./ReadOnlyRow"
+import EditableRow from "./EditableRow"
 
 
 const Dashboard = () => {
@@ -22,6 +24,14 @@ const Dashboard = () => {
     phoneNumber: '',
     email: ''
   })
+
+  const [editFormData, setEditFormData] = useState({
+    fullName: '',
+    address: '',
+    phoneNumber: '',
+    email: ''
+  })
+  const [editContactId, setEditContactId] = useState(null)
 
   //Loading data from Firebase-Realtime-Database
   useEffect(() => {
@@ -51,6 +61,18 @@ const Dashboard = () => {
     setAddFormData(newFormData)
   }
 
+  const handleEditFormChange = (event) => {
+    event.preventDefault()
+
+    const fieldName = event.target.getAttribute('name')
+    const fieldValue = event.target.value
+
+    const newFormData = { ...editFormData }
+    newFormData[fieldName] = fieldValue
+
+    setEditFormData(newFormData)
+  }
+
   const handleAddFormSubmit = (event) => {
     event.preventDefault()
     const newContact = {
@@ -70,6 +92,63 @@ const Dashboard = () => {
       const listObject = Object.values(jsonObject) //Convert a json object to a list of jsons
       setContacts(listObject) //Updating state: 'contacts' using setContacts
     })
+  }
+
+  const HandleEditFormSubmit = (event) => {
+    event.preventDefault()
+
+    //Updated contact information
+    const updatedContact = {
+      id: editContactId,
+      fullName: editFormData.fullName,
+      address: editFormData.address,
+      phoneNumber: editFormData.phoneNumber,
+      email: editFormData.email
+    }
+
+    //BROKEN CODE: Updating Firebase RT-DB
+    // onValue(listsRef, (snapshot) => {
+    //   const jsonObject = snapshot.val()
+    //   for (const [key, value] of Object.entries(jsonObject)) {
+    //     if (value['id'] === editContactId) {
+    //       const updates = {}
+    //       updates[key] = updatedContact
+    //       return update(listsRef, updates)
+    //       //TODO: WHY DO I HAVE AN INFINITE LOOP HERE?!
+    //     }
+    //   }
+    // })
+
+    get(listsRef)
+      .then(snapshot => {
+        if (snapshot.exists()) {
+          const jsonObject = snapshot.val()
+          for (const [key, value] of Object.entries(jsonObject)) {
+            if (value['id'] === editContactId) {
+              const updates = {}
+              updates[key] = updatedContact
+              return update(listsRef, updates)
+            }
+          }
+        }
+        else { console.log('No data available') }
+      }).catch(error => { console.log(error) })
+
+    setEditContactId(null)
+  }
+
+  const handleEditClick = (event, contact) => {
+    event.preventDefault()
+    setEditContactId(contact.id)
+
+    const formData = {
+      fullName: contact.fullName,
+      address: contact.address,
+      phoneNumber: contact.phoneNumber,
+      email: contact.email
+    }
+
+    setEditFormData(formData)
   }
 
   async function handleLogout() {
@@ -96,26 +175,32 @@ const Dashboard = () => {
       </Card>
 
       <div style={{ width: '800px', marginTop: 6 }}>
-        <table>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Address</th>
-              <th>Phone Number</th>
-              <th>Email</th>
-            </tr>
-          </thead>
-          <tbody>
-            {contacts.map((contact) =>
-              <tr key={contact.id}>
-                <td>{contact.fullName}</td>
-                <td>{contact.address}</td>
-                <td>{contact.phoneNumber}</td>
-                <td>{contact.email}</td>
-              </tr>)}
-          </tbody>
-        </table>
+        <form onSubmit={HandleEditFormSubmit}>
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Phone Number</th>
+                <th>Email</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {contacts.map((contact) =>
+                <Fragment key={contact.id}>
+                  {
+                    (contact.id === editContactId) ?
+                      <EditableRow editFormData={editFormData} handleEditFormChange={handleEditFormChange} /> :
+                      <ReadOnlyRow contact={contact} handleEditClick={handleEditClick} />
+                  }
+                </Fragment>
+              )}
+            </tbody>
+          </table>
+        </form>
       </div>
+
       <div style={{ width: '800px', marginTop: 6 }}>
         <h3>Add a Contact</h3>
         <form className='form-container'>
