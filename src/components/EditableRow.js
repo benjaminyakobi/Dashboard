@@ -1,6 +1,6 @@
 import React from 'react'
 
-const EditableRow = ({ editFormData, handleEditFormChange, handleCancelClick }) => {
+const EditableRow = ({ addFormData, handleEditFormChange, handleCancelClick }) => {
     return (
         <tr>
             <td>
@@ -9,7 +9,7 @@ const EditableRow = ({ editFormData, handleEditFormChange, handleCancelClick }) 
                     name="fullName"
                     required="required"
                     placeholder="Enter a name..."
-                    value={editFormData.fullName}
+                    value={addFormData.fullName}
                     onChange={handleEditFormChange} />
             </td>
             <td>
@@ -18,7 +18,7 @@ const EditableRow = ({ editFormData, handleEditFormChange, handleCancelClick }) 
                     name="address"
                     required="required"
                     placeholder="Enter an address..."
-                    value={editFormData.address}
+                    value={addFormData.address}
                     onChange={handleEditFormChange} />
             </td>
             <td>
@@ -27,7 +27,7 @@ const EditableRow = ({ editFormData, handleEditFormChange, handleCancelClick }) 
                     name="phoneNumber"
                     required="required"
                     placeholder="Enter a phone number..."
-                    value={editFormData.phoneNumber}
+                    value={addFormData.phoneNumber}
                     onChange={handleEditFormChange} />
             </td>
             <td>
@@ -36,7 +36,7 @@ const EditableRow = ({ editFormData, handleEditFormChange, handleCancelClick }) 
                     name="email"
                     required="required"
                     placeholder="Enter an email..."
-                    value={editFormData.email}
+                    value={addFormData.email}
                     onChange={handleEditFormChange} />
             </td>
             <td>

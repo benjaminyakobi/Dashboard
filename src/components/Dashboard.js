@@ -11,12 +11,12 @@ import EditableRow from "./EditableRow"
 
 
 const Dashboard = () => {
-  const { currentUser, logout } = useAuth()
-  const [error, setError] = useState('')
-  const history = useHistory()
-
+  const { currentUser, logout } = useAuth() //For firebase authentication
+  const [error, setError] = useState('') //For errors
+  const history = useHistory() //For routing between components
   const listsRef = ref(db, `Lists/${currentUser.uid}`) //Getting a reference to 'Lists' in Firebase-RT-DB
-  const [contacts, setContacts] = useState([])
+  const [contacts, setContacts] = useState([]) //For rendeting contacts that fetched from firebase
+  const [editContactId, setEditContactId] = useState(null) //For editing rows
   const [addFormData, setAddFormData] = useState({
     fullName: '',
     address: '',
@@ -24,14 +24,8 @@ const Dashboard = () => {
     email: ''
   })
 
-  const [editFormData, setEditFormData] = useState({
-    fullName: '',
-    address: '',
-    phoneNumber: '',
-    email: ''
-  })
-  const [editContactId, setEditContactId] = useState(null)
 
+  {/* FIREBASE REALTIME DATABASE */ }
   //Loading data from Firebase-Realtime-Database
   useEffect(() => {
     onValue(listsRef, (snapshot) => {
@@ -48,30 +42,18 @@ const Dashboard = () => {
     })
   }, [])
 
-  const handleAddFormChange = (event) => {
-    event.preventDefault()
-
-    const fieldName = event.target.getAttribute('name')
-    const fieldValue = event.target.value
-
-    const newFormData = { ...addFormData }
-    newFormData[fieldName] = fieldValue
-
-    setAddFormData(newFormData)
+  async function handleLogout() {
+    setError('')
+    try {
+      await logout()
+      history.push('/')
+    } catch {
+      setError('Failed to log out')
+      console.log(error)
+    }
   }
 
-  const handleEditFormChange = (event) => {
-    event.preventDefault()
-
-    const fieldName = event.target.getAttribute('name')
-    const fieldValue = event.target.value
-
-    const newFormData = { ...editFormData }
-    newFormData[fieldName] = fieldValue
-
-    setEditFormData(newFormData)
-  }
-
+  {/* ADDING DATA TO FIREBASE RTDB */ }
   const handleAddFormSubmit = (event) => {
     event.preventDefault()
     const newContact = {
@@ -87,22 +69,40 @@ const Dashboard = () => {
     set(newChildRef, newContact); //Setting new object into the new child (newChildRef)
 
     onValue(listsRef, (snapshot) => {
-      const jsonObject = snapshot.val() //Getting each child value under 'Lists' as a json object
-      const listObject = Object.values(jsonObject) //Convert a json object to a list of jsons
-      setContacts(listObject) //Updating state: 'contacts' using setContacts
+      if (snapshot.exists()) {
+        const jsonObject = snapshot.val() //Getting each child value under 'Lists' as a json object
+        const listObject = Object.values(jsonObject) //Convert a json object to a list of jsons
+        setContacts(listObject) //Updating state: 'contacts' using setContacts
+      } else { 
+        setContacts([])
+        console.log('No data available') 
+      }
     })
   }
 
+  const handleAddFormChange = (event) => {
+    event.preventDefault()
+
+    const fieldName = event.target.getAttribute('name')
+    const fieldValue = event.target.value
+
+    const newFormData = { ...addFormData }
+    newFormData[fieldName] = fieldValue
+
+    setAddFormData(newFormData)
+  }
+
+  {/* EDDITING DATA IN FIREBASE RTDB */ }
   const HandleEditFormSubmit = (event) => {
     event.preventDefault()
 
     //Updated contact information
     const updatedContact = {
       id: editContactId,
-      fullName: editFormData.fullName,
-      address: editFormData.address,
-      phoneNumber: editFormData.phoneNumber,
-      email: editFormData.email
+      fullName: addFormData.fullName,
+      address: addFormData.address,
+      phoneNumber: addFormData.phoneNumber,
+      email: addFormData.email
     }
 
     get(listsRef)
@@ -112,7 +112,7 @@ const Dashboard = () => {
           for (const [key, value] of Object.entries(jsonObject)) {
             if (value['id'] === editContactId) {
               const updates = {}
-              updates[key] = updatedContact
+              updates[key] = updatedContact //Set an updated contact
               return update(listsRef, updates)
             }
           }
@@ -123,8 +123,16 @@ const Dashboard = () => {
     setEditContactId(null)
   }
 
-  const handleCancelClick = () => {
-    setEditContactId(null)
+  const handleEditFormChange = (event) => {
+    event.preventDefault()
+
+    const fieldName = event.target.getAttribute('name')
+    const fieldValue = event.target.value
+
+    const newFormData = { ...addFormData }
+    newFormData[fieldName] = fieldValue
+
+    setAddFormData(newFormData)
   }
 
   const handleEditClick = (event, contact) => {
@@ -138,19 +146,32 @@ const Dashboard = () => {
       email: contact.email
     }
 
-    setEditFormData(formData)
+    setAddFormData(formData)
   }
 
-  async function handleLogout() {
-    setError('')
-    try {
-      await logout()
-      history.push('/')
-    } catch {
-      setError('Failed to log out')
-      console.log(error)
-    }
+  const handleCancelClick = () => {
+    setEditContactId(null)
   }
+
+  {/* DELETE DATA FROM FIREBASE RTDB */ }
+  const handleDeleteClick = (contactId) => {
+    get(listsRef)
+      .then(snapshot => {
+        if (snapshot.exists()) {
+          const jsonObject = snapshot.val()
+          for (const [key, value] of Object.entries(jsonObject)) {
+            if (value['id'] === contactId) {
+              const updates = {}
+              updates[key] = null //Set to null to remove
+              setEditContactId(null)
+              return update(listsRef, updates)
+            }
+          }
+        }
+        else { console.log('No data available') }
+      }).catch(error => { console.log(error) })
+  }
+
 
   return (
     <>
@@ -181,8 +202,8 @@ const Dashboard = () => {
                 <Fragment key={contact.id}>
                   {
                     (contact.id === editContactId) ?
-                      <EditableRow editFormData={editFormData} handleEditFormChange={handleEditFormChange}  handleCancelClick={handleCancelClick}/> :
-                      <ReadOnlyRow contact={contact} handleEditClick={handleEditClick} />
+                      <EditableRow addFormData={addFormData} handleEditFormChange={handleEditFormChange} handleCancelClick={handleCancelClick} /> :
+                      <ReadOnlyRow contact={contact} handleEditClick={handleEditClick} handleDeleteClick={handleDeleteClick} />
                   }
                 </Fragment>
               )}
