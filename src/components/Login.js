@@ -13,16 +13,18 @@ export default function Login() {
 
     async function handleSubmit(event) {
         event.preventDefault()
-
-        try {
-            setError('')
-            setLoading(true)
-            await login(emailRef.current.value, passwordRef.current.value) //if the login fails -> go to catch block
-            setLoading(false)
-            history.push('/dashboard')
-        } catch {
-            setError('Failed to log in')
-        }
+        setError('')
+        setLoading(true)
+        await login(emailRef.current.value, passwordRef.current.value)
+            .then(() => {
+                setLoading(false)
+                history.push('/dashboard')
+            })
+            .catch(error => {
+                setError('Failed to log in')
+                setLoading(false)
+                console.log(error)
+            })
     }
     return (
         <>
