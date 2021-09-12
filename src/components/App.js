@@ -1,9 +1,5 @@
 import "../App.css"
-// import { nanoid } from 'nanoid'
-// import React, { useState, useEffect } from 'react'
 import React from 'react'
-// import { db } from "../initFirebase"
-// import { ref, push, set, onValue } from "firebase/database"
 import { Container } from "react-bootstrap"
 import { AuthProvider } from "./contexts/AuthContext"
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom"

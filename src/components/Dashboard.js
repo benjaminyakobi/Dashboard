@@ -2,8 +2,7 @@ import "../App.css"
 import { nanoid } from 'nanoid'
 import React, { useState, useEffect, Fragment } from 'react'
 import { db } from "../initFirebase"
-import { ref, push, child, set, update, onValue, get } from "firebase/database"
-// import { updateCurrentUser } from "firebase/auth"
+import { ref, push, set, update, onValue, get } from "firebase/database"
 import { useAuth } from './contexts/AuthContext'
 import { Button, Card } from 'react-bootstrap'
 import { Link, useHistory } from 'react-router-dom'
@@ -106,19 +105,6 @@ const Dashboard = () => {
       email: editFormData.email
     }
 
-    //BROKEN CODE: Updating Firebase RT-DB
-    // onValue(listsRef, (snapshot) => {
-    //   const jsonObject = snapshot.val()
-    //   for (const [key, value] of Object.entries(jsonObject)) {
-    //     if (value['id'] === editContactId) {
-    //       const updates = {}
-    //       updates[key] = updatedContact
-    //       return update(listsRef, updates)
-    //       //TODO: WHY DO I HAVE AN INFINITE LOOP HERE?!
-    //     }
-    //   }
-    // })
-
     get(listsRef)
       .then(snapshot => {
         if (snapshot.exists()) {
@@ -134,6 +120,10 @@ const Dashboard = () => {
         else { console.log('No data available') }
       }).catch(error => { console.log(error) })
 
+    setEditContactId(null)
+  }
+
+  const handleCancelClick = () => {
     setEditContactId(null)
   }
 
@@ -191,7 +181,7 @@ const Dashboard = () => {
                 <Fragment key={contact.id}>
                   {
                     (contact.id === editContactId) ?
-                      <EditableRow editFormData={editFormData} handleEditFormChange={handleEditFormChange} /> :
+                      <EditableRow editFormData={editFormData} handleEditFormChange={handleEditFormChange}  handleCancelClick={handleCancelClick}/> :
                       <ReadOnlyRow contact={contact} handleEditClick={handleEditClick} />
                   }
                 </Fragment>
