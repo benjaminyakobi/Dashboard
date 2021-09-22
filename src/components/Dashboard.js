@@ -176,7 +176,7 @@ const Dashboard = () => {
   return (
     <>
       <card>
-        <body className='text-center mt-2'>
+        <body>
           <h6>Email: {currentUser.email}</h6>
           <Link to='/update-email'>Update Email/Password</Link>
           <div>
