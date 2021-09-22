@@ -1,6 +1,6 @@
-import "../App.css"
+// import "../App.css"
 import React from 'react'
-import { Container } from "react-bootstrap"
+// import { Container } from "react-bootstrap"
 import { AuthProvider } from "./contexts/AuthContext"
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 import Login from "./Login"
@@ -13,8 +13,8 @@ import UpdateEmail from "./UpdateEmail"
 const App = () => {
   return (
     <AuthProvider>
-      <Container style={{ width: 'auto' }}>
-        <div style={{ width: '400px' }}>
+      {/* <Container style={{ width: 'auto' }}> */}
+        <div>
           <Router>
             <AuthProvider>
               <Switch>
@@ -27,7 +27,7 @@ const App = () => {
             </AuthProvider>
           </Router>
         </div>
-      </Container>
+      {/* </Container> */}
     </AuthProvider>
   )
 }

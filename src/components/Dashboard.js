@@ -1,10 +1,10 @@
-import "../App.css"
+// import "../App.css"
 import { nanoid } from 'nanoid'
 import React, { useState, useEffect, Fragment } from 'react'
 import { db } from "../initFirebase"
 import { ref, push, set, update, onValue, get } from "firebase/database"
 import { useAuth } from './contexts/AuthContext'
-import { Button, Card } from 'react-bootstrap'
+// import { Button, Card } from 'react-bootstrap'
 import { Link, useHistory } from 'react-router-dom'
 import ReadOnlyRow from "./ReadOnlyRow"
 import EditableRow from "./EditableRow"
@@ -175,17 +175,17 @@ const Dashboard = () => {
 
   return (
     <>
-      <Card>
-        <Card.Body className='text-center mt-2'>
+      <card>
+        <body className='text-center mt-2'>
           <h6>Email: {currentUser.email}</h6>
           <Link to='/update-email'>Update Email/Password</Link>
           <div>
-            <Button variant='link' onClick={handleLogout}>Log Out</Button>
+            <button variant='link' onClick={handleLogout}>Log Out</button>
           </div>
-        </Card.Body>
-      </Card>
+        </body>
+      </card>
 
-      <div style={{ width: '800px', marginTop: 6 }}>
+      <div>
         <form onSubmit={HandleEditFormSubmit}>
           <table>
             <thead>
@@ -212,7 +212,7 @@ const Dashboard = () => {
         </form>
       </div>
 
-      <div style={{ width: '800px', marginTop: 6 }}>
+      <div>
         <h3>Add a Contact</h3>
         <form className='form-container'>
           <input
