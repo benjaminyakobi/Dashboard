@@ -1,5 +1,4 @@
 import React, { useRef, useState } from 'react'
-// import { Form, Button, Card, Alert } from 'react-bootstrap'
 import { useAuth } from '../components/contexts/AuthContext'
 import { Link, useHistory } from 'react-router-dom'
 
@@ -47,7 +46,7 @@ export default function Signup() {
                             <label>Password Confirmation</label>
                             <input type='password' ref={passwordConfirmRef} required />
                         </fieldset>
-                        <button disabled={loading} className='w-100 mt-3' type='submit'>Sign Up</button>
+                        <button disabled={loading} type='submit'>Sign Up</button>
                     </form>
                 </body>
             </card>

@@ -1,5 +1,4 @@
 import React, { useRef, useState } from 'react'
-// import { Form, Button, Card, Alert } from 'react-bootstrap'
 import { useAuth } from '../components/contexts/AuthContext'
 import { Link, useHistory } from 'react-router-dom'
 
@@ -41,7 +40,7 @@ export default function Login() {
                             <label>Password</label>
                             <input type='password' ref={passwordRef} required />
                         </fieldset>
-                        <button disabled={loading} className='w-100 mt-3' type='submit'>Log In</button>
+                        <button disabled={loading} type='submit'>Log In</button>
                     </form>
                     <div>
                         <Link to='/forgot-password'>Forgot Password?</Link>

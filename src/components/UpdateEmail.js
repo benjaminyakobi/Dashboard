@@ -1,8 +1,6 @@
 import React, { useRef, useState } from 'react'
-import { Form, Button, Card, Alert } from 'react-bootstrap'
 import { useAuth } from '../components/contexts/AuthContext'
 import { Link, useHistory } from 'react-router-dom'
-// import { updateEmail } from 'firebase/auth'
 
 export default function UpdateEmail() {
     const emailRef = useRef()
@@ -41,28 +39,28 @@ export default function UpdateEmail() {
 
     return (
         <>
-            <Card>
-                <Card.Body>
-                    <h2 className='text-center mb-4'>Update Email/Password</h2>
-                    {error && <Alert variant='danger'>{error}</Alert>}
-                    <Form onSubmit={handleSubmit}>
-                        <Form.Group id='email'>
-                            <Form.Label>Email</Form.Label>
-                            <Form.Control type='email' ref={emailRef} required defaultValue={currentUser.email} />
-                        </Form.Group>
-                        <Form.Group id='password'>
-                            <Form.Label>Password</Form.Label>
-                            <Form.Control type='password' ref={passwordRef} placeholder='Leave blank to keep the same' />
-                        </Form.Group>
-                        <Form.Group id='password-confirm'>
-                            <Form.Label>Password Confirmation</Form.Label>
-                            <Form.Control type='password' ref={passwordConfirmRef} placeholder='Leave blank to keep the same' />
-                        </Form.Group>
-                        <Button disabled={loading} className='w-100 mt-3' type='submit'>Update</Button>
-                    </Form>
-                </Card.Body>
-            </Card>
-            <div className='w-100 text-center mt-2'>
+            <card>
+                <body>
+                    <h2>Update Email/Password</h2>
+                    {error && <alert variant='danger'>{error}</alert>}
+                    <form onSubmit={handleSubmit}>
+                        <fieldset id='email'>
+                            <label>Email</label>
+                            <input type='email' ref={emailRef} required defaultValue={currentUser.email} />
+                        </fieldset>
+                        <fieldset id='password'>
+                            <label>Password</label>
+                            <control type='password' ref={passwordRef} placeholder='Leave blank to keep the same' />
+                        </fieldset>
+                        <fieldset id='password-confirm'>
+                            <label>Password Confirmation</label>
+                            <input type='password' ref={passwordConfirmRef} placeholder='Leave blank to keep the same' />
+                        </fieldset>
+                        <button disabled={loading} type='submit'>Update</button>
+                    </form>
+                </body>
+            </card>
+            <div>
                 <Link to='/dashboard'>Cancel</Link>
             </div>
         </>

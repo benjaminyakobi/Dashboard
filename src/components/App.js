@@ -1,6 +1,4 @@
-// import "../App.css"
 import React from 'react'
-// import { Container } from "react-bootstrap"
 import { AuthProvider } from "./contexts/AuthContext"
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 import Login from "./Login"
@@ -9,11 +7,15 @@ import Dashboard from './Dashboard'
 import PrivateRoute from "./PrivateRoute"
 import ForgotPassword from "./ForgotPassword"
 import UpdateEmail from "./UpdateEmail"
-
+//TODO: Styling: App (application container)
+//TODO: Styling: Login
+//TODO: Styling: Signup
+//TODO: Styling: ForgotPassword
+//TODO: Styling: UpdateEmail
+//TODO: Styling: Dashboard
 const App = () => {
   return (
     <AuthProvider>
-      {/* <Container style={{ width: 'auto' }}> */}
         <div>
           <Router>
             <AuthProvider>
@@ -27,7 +29,6 @@ const App = () => {
             </AuthProvider>
           </Router>
         </div>
-      {/* </Container> */}
     </AuthProvider>
   )
 }

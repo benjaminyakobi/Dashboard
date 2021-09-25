@@ -1,10 +1,8 @@
-// import "../App.css"
 import { nanoid } from 'nanoid'
 import React, { useState, useEffect, Fragment } from 'react'
 import { db } from "../initFirebase"
 import { ref, push, set, update, onValue, get } from "firebase/database"
 import { useAuth } from './contexts/AuthContext'
-// import { Button, Card } from 'react-bootstrap'
 import { Link, useHistory } from 'react-router-dom'
 import ReadOnlyRow from "./ReadOnlyRow"
 import EditableRow from "./EditableRow"
@@ -214,7 +212,7 @@ const Dashboard = () => {
 
       <div>
         <h3>Add a Contact</h3>
-        <form className='form-container'>
+        <form>
           <input
             type="text"
             name="fullName"
