@@ -23,7 +23,7 @@ const Dashboard = () => {
   })
 
 
-  /* FIREBASE REALTIME DATABASE */ 
+  /* FIREBASE REALTIME DATABASE */
   //Loading data from Firebase-Realtime-Database
   useEffect(() => {
     onValue(listsRef, (snapshot) => {
@@ -51,7 +51,7 @@ const Dashboard = () => {
     }
   }
 
-  /* ADDING DATA TO FIREBASE RTDB */ 
+  /* ADDING DATA TO FIREBASE RTDB */
   const handleAddFormSubmit = (event) => {
     event.preventDefault()
     const newContact = {
@@ -71,9 +71,9 @@ const Dashboard = () => {
         const jsonObject = snapshot.val() //Getting each child value under 'Lists' as a json object
         const listObject = Object.values(jsonObject) //Convert a json object to a list of jsons
         setContacts(listObject) //Updating state: 'contacts' using setContacts
-      } else { 
+      } else {
         setContacts([])
-        console.log('No data available') 
+        console.log('No data available')
       }
     })
   }
@@ -90,7 +90,7 @@ const Dashboard = () => {
     setAddFormData(newFormData)
   }
 
-  /* EDDITING DATA IN FIREBASE RTDB */ 
+  /* EDDITING DATA IN FIREBASE RTDB */
   const HandleEditFormSubmit = (event) => {
     event.preventDefault()
 
@@ -151,7 +151,7 @@ const Dashboard = () => {
     setEditContactId(null)
   }
 
-  /* DELETE DATA FROM FIREBASE RTDB */ 
+  /* DELETE DATA FROM FIREBASE RTDB */
   const handleDeleteClick = (contactId) => {
     get(listsRef)
       .then(snapshot => {
@@ -173,15 +173,13 @@ const Dashboard = () => {
 
   return (
     <>
-      <card>
-        <body>
-          <h6>Email: {currentUser.email}</h6>
-          <Link to='/update-email'>Update Email/Password</Link>
-          <div>
-            <button variant='link' onClick={handleLogout}>Log Out</button>
-          </div>
-        </body>
-      </card>
+      <div>
+        <h6>Email: {currentUser.email}</h6>
+        <Link to='/update-email'>Update Email/Password</Link>
+        <div>
+          <button variant='link' onClick={handleLogout}>Log Out</button>
+        </div>
+      </div>
 
       <div>
         <form onSubmit={HandleEditFormSubmit}>

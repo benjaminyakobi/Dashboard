@@ -27,27 +27,24 @@ export default function Login() {
     }
     return (
         <>
-            <card>
-                <body>
-                    <h2>Log In</h2>
-                    {error && <alert variant='danger'>{error}</alert>}
-                    <form onSubmit={handleSubmit}>
-                        <fieldset id='email'>
-                            <label>Email</label>
-                            <input type='email' ref={emailRef} required />
-                        </fieldset>
-                        <fieldset id='password'>
-                            <label>Password</label>
-                            <input type='password' ref={passwordRef} required />
-                        </fieldset>
-                        <button disabled={loading} type='submit'>Log In</button>
-                    </form>
-                    <div>
-                        <Link to='/forgot-password'>Forgot Password?</Link>
-                    </div>
-
-                </body>
-            </card>
+            <div>
+                <h2>Log In</h2>
+                {error && <alert variant='danger'>{error}</alert>}
+                <form onSubmit={handleSubmit}>
+                    <fieldset id='email'>
+                        <label>Email</label>
+                        <input type='email' ref={emailRef} required />
+                    </fieldset>
+                    <fieldset id='password'>
+                        <label>Password</label>
+                        <input type='password' ref={passwordRef} required />
+                    </fieldset>
+                    <button disabled={loading} type='submit'>Log In</button>
+                </form>
+                <div>
+                    <Link to='/forgot-password'>Forgot Password?</Link>
+                </div>
+            </div>
             <div>
                 Need an account? <Link to='/signup'>Sign Up</Link>
             </div>

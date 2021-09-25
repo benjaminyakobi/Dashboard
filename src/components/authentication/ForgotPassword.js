@@ -24,24 +24,21 @@ export default function ForgotPassword() {
     }
     return (
         <>
-            <card>
-                <body>
-                    <h2>Password Reset</h2>
-                    {error && <alert variant='danger'>{error}</alert>}
-                    {message && <alert variant='info'>{message}</alert>}
-                    <form onSubmit={handleSubmit}>
-                        <fieldset id='email'>
-                            <label>Email</label>
-                            <input type='email' ref={emailRef} required />
-                        </fieldset>
-                        <button disabled={loading} type='submit'>Reset Password</button>
-                    </form>
-                    <div>
-                        <Link to='/'>Login</Link>
-                    </div>
-
-                </body>
-            </card>
+            <div>
+                <h2>Password Reset</h2>
+                {error && <alert variant='danger'>{error}</alert>}
+                {message && <alert variant='info'>{message}</alert>}
+                <form onSubmit={handleSubmit}>
+                    <fieldset id='email'>
+                        <label>Email</label>
+                        <input type='email' ref={emailRef} required />
+                    </fieldset>
+                    <button disabled={loading} type='submit'>Reset Password</button>
+                </form>
+                <div>
+                    <Link to='/'>Login</Link>
+                </div>
+            </div>
             <div>
                 Need an account? <Link to='/signup'>Sign Up</Link>
             </div>
