@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react'
-import { useAuth } from '../components/contexts/AuthContext'
+import { useAuth } from '../contexts/AuthContext'
 import { Link } from 'react-router-dom'
 
 export default function ForgotPassword() {

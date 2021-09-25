@@ -1,8 +1,8 @@
 import { nanoid } from 'nanoid'
 import React, { useState, useEffect, Fragment } from 'react'
-import { db } from "../initFirebase"
+import { db } from "../../initFirebase"
 import { ref, push, set, update, onValue, get } from "firebase/database"
-import { useAuth } from './contexts/AuthContext'
+import { useAuth } from '../../components/contexts/AuthContext'
 import { Link, useHistory } from 'react-router-dom'
 import ReadOnlyRow from "./ReadOnlyRow"
 import EditableRow from "./EditableRow"

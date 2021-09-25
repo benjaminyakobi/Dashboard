@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react'
-import { useAuth } from '../components/contexts/AuthContext'
+import { useAuth } from '../contexts/AuthContext'
 import { Link, useHistory } from 'react-router-dom'
 
 export default function UpdateEmail() {
@@ -50,7 +50,7 @@ export default function UpdateEmail() {
                         </fieldset>
                         <fieldset id='password'>
                             <label>Password</label>
-                            <control type='password' ref={passwordRef} placeholder='Leave blank to keep the same' />
+                            <input type='password' ref={passwordRef} placeholder='Leave blank to keep the same' />
                         </fieldset>
                         <fieldset id='password-confirm'>
                             <label>Password Confirmation</label>

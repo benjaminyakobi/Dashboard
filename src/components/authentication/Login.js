@@ -1,37 +1,35 @@
 import React, { useRef, useState } from 'react'
-import { useAuth } from '../components/contexts/AuthContext'
+import { useAuth } from '../contexts/AuthContext'
 import { Link, useHistory } from 'react-router-dom'
 
-export default function Signup() {
+export default function Login() {
     const emailRef = useRef()
     const passwordRef = useRef()
-    const passwordConfirmRef = useRef()
-    const { signup } = useAuth()
+    const { login } = useAuth()
     const [error, setError] = useState('')
     const [loading, setLoading] = useState(false)
     const history = useHistory()
 
     async function handleSubmit(event) {
         event.preventDefault()
-        if (passwordRef.current.value !== passwordConfirmRef.current.value) {
-            return setError('Passwords do not match')
-        }
-        try {
-            setError('')
-            setLoading(true)
-            await signup(emailRef.current.value, passwordRef.current.value) //if the signup fails -> go to catch block
-            setLoading(false)
-            history.push('/')
-        } catch {
-            setError('Failed to create an account')
-        }
+        setError('')
+        setLoading(true)
+        await login(emailRef.current.value, passwordRef.current.value)
+            .then(() => {
+                setLoading(false)
+                history.push('/dashboard')
+            })
+            .catch(error => {
+                setError('Failed to log in')
+                setLoading(false)
+                console.log(error)
+            })
     }
-    
     return (
         <>
             <card>
                 <body>
-                    <h2>Sign Up</h2>
+                    <h2>Log In</h2>
                     {error && <alert variant='danger'>{error}</alert>}
                     <form onSubmit={handleSubmit}>
                         <fieldset id='email'>
@@ -42,16 +40,16 @@ export default function Signup() {
                             <label>Password</label>
                             <input type='password' ref={passwordRef} required />
                         </fieldset>
-                        <fieldset id='password-confirm'>
-                            <label>Password Confirmation</label>
-                            <input type='password' ref={passwordConfirmRef} required />
-                        </fieldset>
-                        <button disabled={loading} type='submit'>Sign Up</button>
+                        <button disabled={loading} type='submit'>Log In</button>
                     </form>
+                    <div>
+                        <Link to='/forgot-password'>Forgot Password?</Link>
+                    </div>
+
                 </body>
             </card>
             <div>
-                Already have an account? <Link to='/'>Log In</Link>
+                Need an account? <Link to='/signup'>Sign Up</Link>
             </div>
         </>
     )

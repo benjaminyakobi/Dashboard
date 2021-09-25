@@ -1,12 +1,12 @@
 import React from 'react'
 import { AuthProvider } from "./contexts/AuthContext"
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
-import Login from "./Login"
-import Signup from "./Signup"
-import Dashboard from './Dashboard'
-import PrivateRoute from "./PrivateRoute"
-import ForgotPassword from "./ForgotPassword"
-import UpdateEmail from "./UpdateEmail"
+import Login from "./authentication/Login"
+import Signup from "./authentication/Signup"
+import Dashboard from './table/Dashboard'
+import PrivateRoute from "./routing/PrivateRoute"
+import ForgotPassword from "./authentication/ForgotPassword"
+import UpdateEmail from "./authentication/UpdateEmail"
 //TODO: Styling: App (application container)
 //TODO: Styling: Login
 //TODO: Styling: Signup
