@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react'
 import { useAuth } from '../contexts/AuthContext'
 import { Link, useHistory } from 'react-router-dom'
+import { AppButton, LoginDiv, LoginH1, LoginInput } from '../styles/App.style'
 
 export default function Login() {
     const emailRef = useRef()
@@ -27,27 +28,30 @@ export default function Login() {
     }
     return (
         <>
-            <div>
-                <h2>Log In</h2>
-                {error && <alert variant='danger'>{error}</alert>}
+            <LoginDiv>
+                <LoginH1>Log In</LoginH1>
+                {error && <alert>{error}</alert>}
+            </LoginDiv>
+            <LoginDiv>
                 <form onSubmit={handleSubmit}>
                     <fieldset id='email'>
-                        <label>Email</label>
-                        <input type='email' ref={emailRef} required />
+                        <LoginInput type='email' placeholder='Enter Email' ref={emailRef} required />
                     </fieldset>
                     <fieldset id='password'>
-                        <label>Password</label>
-                        <input type='password' ref={passwordRef} required />
+                        <LoginInput type='password' placeholder='Enter Password' ref={passwordRef} required />
                     </fieldset>
-                    <button disabled={loading} type='submit'>Log In</button>
+                    <AppButton disabled={loading} type='submit'>Log In</AppButton>
                 </form>
-                <div>
-                    <Link to='/forgot-password'>Forgot Password?</Link>
-                </div>
-            </div>
-            <div>
-                Need an account? <Link to='/signup'>Sign Up</Link>
-            </div>
+            </LoginDiv>
+
+            <LoginDiv>
+                <Link to='/forgot-password'>
+                    <AppButton>Forgot Password?</AppButton>
+                </Link>
+                <Link to='/signup'>
+                    <AppButton>Sign Up</AppButton>
+                </Link>
+            </LoginDiv>
         </>
     )
 }
