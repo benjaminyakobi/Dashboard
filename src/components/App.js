@@ -7,6 +7,7 @@ import Dashboard from './table/Dashboard'
 import PrivateRoute from "./routing/PrivateRoute"
 import ForgotPassword from "./authentication/ForgotPassword"
 import UpdateEmail from "./authentication/UpdateEmail"
+import { AppDiv } from './styles/App.style'
 //TODO: Styling: App (application container)
 //TODO: Styling: Login
 //TODO: Styling: Signup
@@ -16,7 +17,7 @@ import UpdateEmail from "./authentication/UpdateEmail"
 const App = () => {
   return (
     <AuthProvider>
-        <div>
+        <AppDiv>
           <Router>
             <AuthProvider>
               <Switch>
@@ -28,7 +29,7 @@ const App = () => {
               </Switch>
             </AuthProvider>
           </Router>
-        </div>
+        </AppDiv>
     </AuthProvider>
   )
 }
