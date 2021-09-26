@@ -6,6 +6,7 @@ import { useAuth } from '../../components/contexts/AuthContext'
 import { Link, useHistory } from 'react-router-dom'
 import ReadOnlyRow from "./ReadOnlyRow"
 import EditableRow from "./EditableRow"
+import { Table } from 'react-bootstrap'
 
 
 const Dashboard = () => {
@@ -183,7 +184,7 @@ const Dashboard = () => {
 
       <div>
         <form onSubmit={HandleEditFormSubmit}>
-          <table>
+          <Table>
             <thead>
               <tr>
                 <th>Name</th>
@@ -204,7 +205,7 @@ const Dashboard = () => {
                 </Fragment>
               )}
             </tbody>
-          </table>
+          </Table>
         </form>
       </div>
 
