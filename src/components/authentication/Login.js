@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react'
 import { useAuth } from '../contexts/AuthContext'
 import { Link, useHistory } from 'react-router-dom'
 import { AppButton, LoginDiv, LoginDivContainer, LoginH1, LoginInput } from '../styles/App.style'
+import { Alert } from 'react-bootstrap'
 
 export default function Login() {
     const emailRef = useRef()
@@ -30,8 +31,9 @@ export default function Login() {
         <LoginDivContainer>
             <LoginDiv>
                 <LoginH1>Log In</LoginH1>
-                {error && <alert>{error}</alert>}
             </LoginDiv>
+            {error && <Alert variant='danger'>{error}</Alert>}
+
             <LoginDiv>
                 <form onSubmit={handleSubmit}>
                     <fieldset id='email'>
@@ -43,15 +45,15 @@ export default function Login() {
                     <AppButton disabled={loading} type='submit'>Log In</AppButton>
                 </form>
             </LoginDiv>
-
+            <br />
             <LoginDiv>
-                <Link to='/forgot-password'>
-                    <AppButton>Forgot Password?</AppButton>
+                <Link to='/forgot-password' style={{ color: 'white' }}>
+                    Forgot Password?
                 </Link>
-                </LoginDiv>
-                <LoginDiv>
-                <Link to='/signup'>
-                    <AppButton>Sign Up</AppButton>
+            </LoginDiv>
+            <LoginDiv>
+                <Link to='/signup' style={{ color: 'white', marginBottom: '2rem' }}>
+                    Sign Up
                 </Link>
             </LoginDiv>
         </LoginDivContainer>
