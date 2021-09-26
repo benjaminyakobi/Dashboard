@@ -20,6 +20,7 @@ export const AppDiv = styled.div`
 	animation: ${gradient} 15s ease infinite;
     width: 100vw;
     height: 100vh;
+    position: relative; 
 `;
 
 export const AppButton = styled.button`
@@ -40,10 +41,25 @@ export const AppButton = styled.button`
     } 
 `;
 
+export const LoginDivContainer = styled.div`
+        margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+    /* background-color: white; */
+    width: 20vw;
+    height: 60vh;
+    background: linear-gradient(45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+	background-size: 400% 400%;
+	animation: ${gradient} 15s ease infinite;
+`;
+
 export const LoginDiv = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+
 `;
 
 export const LoginH1 = styled.h1`

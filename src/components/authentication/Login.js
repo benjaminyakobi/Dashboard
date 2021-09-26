@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react'
 import { useAuth } from '../contexts/AuthContext'
 import { Link, useHistory } from 'react-router-dom'
-import { AppButton, LoginDiv, LoginH1, LoginInput } from '../styles/App.style'
+import { AppButton, LoginDiv, LoginDivContainer, LoginH1, LoginInput } from '../styles/App.style'
 
 export default function Login() {
     const emailRef = useRef()
@@ -27,7 +27,7 @@ export default function Login() {
             })
     }
     return (
-        <>
+        <LoginDivContainer>
             <LoginDiv>
                 <LoginH1>Log In</LoginH1>
                 {error && <alert>{error}</alert>}
@@ -48,10 +48,12 @@ export default function Login() {
                 <Link to='/forgot-password'>
                     <AppButton>Forgot Password?</AppButton>
                 </Link>
+                </LoginDiv>
+                <LoginDiv>
                 <Link to='/signup'>
                     <AppButton>Sign Up</AppButton>
                 </Link>
             </LoginDiv>
-        </>
+        </LoginDivContainer>
     )
 }
