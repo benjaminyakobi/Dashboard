@@ -6,7 +6,7 @@ import { useAuth } from '../../components/contexts/AuthContext'
 import { Link, useHistory } from 'react-router-dom'
 import ReadOnlyRow from "./ReadOnlyRow"
 import EditableRow from "./EditableRow"
-import { Table, Button, InputGroup, FormControl, Card, Badge } from 'react-bootstrap'
+import { Table, Button, InputGroup, FormControl } from 'react-bootstrap'
 import { LoginDiv } from '../styles/App.style'
 
 
