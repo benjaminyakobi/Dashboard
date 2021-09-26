@@ -104,10 +104,6 @@ export const LoginInput = styled.input`
     }
 `;
 
-export const DashboardButton = styled.button`
-
-`;
-
 export const DashboardDivContainer = styled.div`
 
 `;

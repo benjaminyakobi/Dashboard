@@ -207,7 +207,7 @@ const Dashboard = () => {
       </div>
 
       <div>
-        <h3>Add a Contact</h3>
+        <h5>Add a Contact</h5>
         <form>
           <InputGroup size='sm'>
             <FormControl
