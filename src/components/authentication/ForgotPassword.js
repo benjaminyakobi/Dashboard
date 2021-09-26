@@ -1,6 +1,8 @@
 import React, { useRef, useState } from 'react'
 import { useAuth } from '../contexts/AuthContext'
 import { Link } from 'react-router-dom'
+import { AppButton, LoginDivContainer, LoginH1, LoginInput, LoginDiv } from '../styles/App.style'
+import { Alert } from 'react-bootstrap'
 
 export default function ForgotPassword() {
     const emailRef = useRef()
@@ -23,25 +25,25 @@ export default function ForgotPassword() {
         setLoading(false)
     }
     return (
-        <>
-            <div>
-                <h2>Password Reset</h2>
-                {error && <alert variant='danger'>{error}</alert>}
-                {message && <alert variant='info'>{message}</alert>}
+        <LoginDivContainer>
+            <LoginDiv><LoginH1>Password Reset</LoginH1></LoginDiv>
+            {error && <Alert variant='danger'>{error}</Alert>}
+            {message && <Alert variant='info'>{message}</Alert>}
+            <LoginDiv>
                 <form onSubmit={handleSubmit}>
                     <fieldset id='email'>
-                        <label>Email</label>
-                        <input type='email' ref={emailRef} required />
+                        <LoginInput type='email' placeholder='Enter Email' ref={emailRef} required />
                     </fieldset>
-                    <button disabled={loading} type='submit'>Reset Password</button>
+                    <AppButton disabled={loading} type='submit'>Reset Password</AppButton>
                 </form>
-                <div>
-                    <Link to='/'>Login</Link>
-                </div>
-            </div>
-            <div>
-                Need an account? <Link to='/signup'>Sign Up</Link>
-            </div>
-        </>
+            </LoginDiv>
+            <br />
+            <LoginDiv>
+                <Link to='/' style={{ color: 'white' }}>Back To Login</Link>
+            </LoginDiv>
+            <LoginDiv>
+                <Link to='/signup' style={{ color: 'white', marginBottom: '2rem' }}>Sign Up</Link>
+            </LoginDiv>
+        </LoginDivContainer>
     )
 }

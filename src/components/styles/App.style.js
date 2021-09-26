@@ -43,13 +43,13 @@ export const LoginDiv = styled.div`
 
 export const AppButton = styled.button`
     border-radius: 3px;
-    border: 2px solid #ff9933;
-    color: #ff9933;
+    border: 2px solid #fff;
+    color: #fff;
     margin: 5px;
     padding: 5px;    
     width: 200px;
     height: 50px;
-    background: linear-gradient(to right, #eee, #eee);
+    background: linear-gradient(to right, #ccc, #ccc);
     background-repeat: no-repeat;
     background-size: 0% 100%;
     transition: background-size 0.5s 0s;
@@ -63,7 +63,18 @@ export const LoginH1 = styled.h1`
     margin-top: 2rem;
     color: black;
     font-family: 'Raleway',sans-serif;
-    font-size: 2rem;
+    font-size: 1.5rem;
+    font-weight: 800;
+    line-height: 72px;
+    text-align: center;
+    text-transform: uppercase;
+`;
+
+export const LoginH2 = styled.h2`
+    margin-top: 2rem;
+    color: black;
+    font-family: 'Raleway',sans-serif;
+    font-size: 1.2rem;
     font-weight: 800;
     line-height: 72px;
     text-align: center;
@@ -76,8 +87,8 @@ export const LoginInput = styled.input`
     width: 200px;
     height: 50px;
     background: transparent;
-    border-color: #ff9933;
-    background: linear-gradient(to right, #eee, #eee);
+    border-color: #fff;
+    background: linear-gradient(to right, #ccc, #ccc);
     background-repeat: no-repeat;
     background-size: 0% 100%;
     transition: background-size 0.5s 0s;
@@ -85,7 +96,7 @@ export const LoginInput = styled.input`
     font-family: 'Raleway',sans-serif;
     font-size: 1rem;
     font-weight: bold;
-    ::placeholder {color: #ff9933;}
+    ::placeholder {color: #fff;}
 
     &:focus{
         outline: none;

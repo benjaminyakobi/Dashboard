@@ -1,6 +1,8 @@
 import React, { useRef, useState } from 'react'
 import { useAuth } from '../contexts/AuthContext'
 import { Link, useHistory } from 'react-router-dom'
+import { AppButton, LoginDivContainer, LoginH1, LoginDiv, LoginInput } from '../styles/App.style'
+import { Alert } from 'react-bootstrap'
 
 export default function Signup() {
     const emailRef = useRef()
@@ -28,29 +30,27 @@ export default function Signup() {
     }
 
     return (
-        <>
-            <div>
-                <h2>Sign Up</h2>
-                {error && <alert variant='danger'>{error}</alert>}
+        <LoginDivContainer>
+            <LoginDiv><LoginH1>Sign Up</LoginH1></LoginDiv>
+            {error && <Alert variant='danger'>{error}</Alert>}
+            <LoginDiv>
                 <form onSubmit={handleSubmit}>
                     <fieldset id='email'>
-                        <label>Email</label>
-                        <input type='email' ref={emailRef} required />
+                        <LoginInput type='email' placeholder='Enter Email' ref={emailRef} required />
                     </fieldset>
                     <fieldset id='password'>
-                        <label>Password</label>
-                        <input type='password' ref={passwordRef} required />
+                        <LoginInput type='password' placeholder='Enter Password' ref={passwordRef} required />
                     </fieldset>
                     <fieldset id='password-confirm'>
-                        <label>Password Confirmation</label>
-                        <input type='password' ref={passwordConfirmRef} required />
+                        <LoginInput type='password' placeholder='Confirm Password' ref={passwordConfirmRef} required />
                     </fieldset>
-                    <button disabled={loading} type='submit'>Sign Up</button>
+                    <AppButton disabled={loading} type='submit'>Sign Up</AppButton>
                 </form>
-            </div>
-            <div>
-                Already have an account? <Link to='/'>Log In</Link>
-            </div>
-        </>
+            </LoginDiv>
+            <br />
+            <LoginDiv>
+                <Link to='/' style={{ color: 'white', marginBottom: '2rem' }}>Back To Login</Link>
+            </LoginDiv>
+        </LoginDivContainer>
     )
 }

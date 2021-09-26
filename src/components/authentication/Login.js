@@ -29,9 +29,7 @@ export default function Login() {
     }
     return (
         <LoginDivContainer>
-            <LoginDiv>
-                <LoginH1>Log In</LoginH1>
-            </LoginDiv>
+            <LoginDiv><LoginH1>Log In</LoginH1></LoginDiv>
             {error && <Alert variant='danger'>{error}</Alert>}
 
             <LoginDiv>

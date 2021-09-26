@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react'
 import { useAuth } from '../contexts/AuthContext'
 import { Link, useHistory } from 'react-router-dom'
+import { AppButton, LoginDiv, LoginDivContainer, LoginH2, LoginInput } from '../styles/App.style'
 
 export default function UpdateEmail() {
     const emailRef = useRef()
@@ -38,29 +39,27 @@ export default function UpdateEmail() {
     }
 
     return (
-        <>
-            <div>
-                <h2>Update Email/Password</h2>
-                {error && <alert variant='danger'>{error}</alert>}
+        <LoginDivContainer>
+        <LoginDiv><LoginH2>Update Email/Password</LoginH2></LoginDiv>
+        {error && <alert variant='danger'>{error}</alert>}
+            <LoginDiv>
                 <form onSubmit={handleSubmit}>
                     <fieldset id='email'>
-                        <label>Email</label>
-                        <input type='email' ref={emailRef} required defaultValue={currentUser.email} />
+                        <LoginInput type='email' ref={emailRef} placeholder='Enter Email' required defaultValue={currentUser.email} />
                     </fieldset>
                     <fieldset id='password'>
-                        <label>Password</label>
-                        <input type='password' ref={passwordRef} placeholder='Leave blank to keep the same' />
+                        <LoginInput type='password' ref={passwordRef} placeholder='Enter Password' />
                     </fieldset>
                     <fieldset id='password-confirm'>
-                        <label>Password Confirmation</label>
-                        <input type='password' ref={passwordConfirmRef} placeholder='Leave blank to keep the same' />
+                        <LoginInput type='password' ref={passwordConfirmRef} placeholder='Confirm Password' />
                     </fieldset>
-                    <button disabled={loading} type='submit'>Update</button>
+                    <AppButton disabled={loading} type='submit'>Update</AppButton>
                 </form>
-            </div>
-            <div>
-                <Link to='/dashboard'>Cancel</Link>
-            </div>
-        </>
+            </LoginDiv>
+            <br/>
+            <LoginDiv>
+                <Link to='/dashboard' style={{ color: 'white', marginBottom: '2rem' }}>Cancel</Link>
+            </LoginDiv>
+        </LoginDivContainer>
     )
 }
