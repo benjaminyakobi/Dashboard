@@ -6,7 +6,8 @@ import { useAuth } from '../../components/contexts/AuthContext'
 import { Link, useHistory } from 'react-router-dom'
 import ReadOnlyRow from "./ReadOnlyRow"
 import EditableRow from "./EditableRow"
-import { Table } from 'react-bootstrap'
+import { Table, Button, InputGroup, FormControl, Card, Badge } from 'react-bootstrap'
+import { LoginDiv } from '../styles/App.style'
 
 
 const Dashboard = () => {
@@ -174,17 +175,13 @@ const Dashboard = () => {
 
   return (
     <>
-      <div>
-        <h6>Email: {currentUser.email}</h6>
-        <Link to='/update-email'>Update Email/Password</Link>
-        <div>
-          <button variant='link' onClick={handleLogout}>Log Out</button>
-        </div>
-      </div>
-
+      <LoginDiv>
+        <Button variant='danger' size='sm' onClick={handleLogout}>Logout from {currentUser.email}</Button>
+        <Link to='/update-email'><Button size='sm'>Update Email/Password</Button></Link>
+      </LoginDiv>
       <div>
         <form onSubmit={HandleEditFormSubmit}>
-          <Table>
+          <Table size='sm'>
             <thead>
               <tr>
                 <th>Name</th>
@@ -212,31 +209,34 @@ const Dashboard = () => {
       <div>
         <h3>Add a Contact</h3>
         <form>
-          <input
-            type="text"
-            name="fullName"
-            required="required"
-            placeholder="Enter a name..."
-            onChange={handleAddFormChange} />
-          <input
-            type="text"
-            name="address"
-            required="required"
-            placeholder="Enter an address..."
-            onChange={handleAddFormChange} />
-          <input
-            type="text"
-            name="phoneNumber"
-            required="required"
-            placeholder="Enter a phone number..."
-            onChange={handleAddFormChange} />
-          <input
-            type="email"
-            name="email"
-            required="required"
-            placeholder="Enter an email..."
-            onChange={handleAddFormChange} />
-          <button type="reset" onClick={handleAddFormSubmit}>Add</button>
+          <InputGroup size='sm'>
+            <FormControl
+              type="text"
+              name="fullName"
+              required="required"
+              placeholder="Enter a name..."
+              onChange={handleAddFormChange} />
+            <FormControl
+              type="text"
+              name="address"
+              required="required"
+              placeholder="Enter an address..."
+              onChange={handleAddFormChange} />
+            <FormControl
+              type="text"
+              name="phoneNumber"
+              required="required"
+              placeholder="Enter a phone number..."
+              onChange={handleAddFormChange} />
+            <FormControl
+              type="email"
+              name="email"
+              required="required"
+              placeholder="Enter an email..."
+              onChange={handleAddFormChange} />
+
+            <Button type="reset" variant='primary' onClick={handleAddFormSubmit}>Add</Button>
+          </InputGroup>
         </form>
       </div>
     </>

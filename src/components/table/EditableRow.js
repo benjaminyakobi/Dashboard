@@ -1,4 +1,5 @@
 import React from 'react'
+import { Button } from 'react-bootstrap'
 
 const EditableRow = ({ addFormData, handleEditFormChange, handleCancelClick }) => {
     return (
@@ -40,8 +41,8 @@ const EditableRow = ({ addFormData, handleEditFormChange, handleCancelClick }) =
                     onChange={handleEditFormChange} />
             </td>
             <td>
-                <button type='submit'>Save</button>
-                <button type='button' onClick={handleCancelClick}>Cancel</button>
+                <Button type='submit' size='sm' variant='success'>Save</Button> {' '}
+                <Button type='button' size='sm' variant='danger' onClick={handleCancelClick}>Cancel</Button>
             </td>
         </tr>
     )

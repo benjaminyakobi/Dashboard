@@ -103,3 +103,15 @@ export const LoginInput = styled.input`
         background-size: 100% 100%;
     }
 `;
+
+export const DashboardButton = styled.button`
+
+`;
+
+export const DashboardDivContainer = styled.div`
+
+`;
+
+export const DashboardDiv = styled.div`
+
+`;

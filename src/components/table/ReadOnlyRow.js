@@ -1,4 +1,5 @@
 import React from 'react'
+import {Button} from 'react-bootstrap'
 
 function ReadOnlyRow({ contact, handleEditClick, handleDeleteClick }) {
     return (
@@ -8,8 +9,8 @@ function ReadOnlyRow({ contact, handleEditClick, handleDeleteClick }) {
             <td>{contact.phoneNumber}</td>
             <td>{contact.email}</td>
             <td>
-                <button type='button' onClick={(event) => handleEditClick(event, contact)}>Edit</button>
-                <button type='button' onClick={() => handleDeleteClick(contact.id)}>Delete</button>
+                <Button type='button' size='sm' variant='success' onClick={(event) => handleEditClick(event, contact)}>Edit</Button>{' '}
+                <Button type='button' size='sm' variant='danger'  onClick={() => handleDeleteClick(contact.id)}>Delete</Button>
             </td>
         </tr>
     )
