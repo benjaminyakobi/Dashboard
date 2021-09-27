@@ -18,8 +18,10 @@ export const AppDiv = styled.div`
 	background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
 	background-size: 400% 400%;
 	animation: ${gradient} 15s ease infinite;
-    width: 100vw; /* VW: Viewport Width */
-    height: 100vh; /* VH: Viewport Height */
+    min-width: 100vw; /* VW: Viewport Width */
+    min-height: 100vh; /* VH: Viewport Height */
+    width: 100%;
+    height: 100%;
     position: relative; /* Important for centeralize vertically & horizontally */
 `;
 
