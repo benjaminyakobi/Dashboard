@@ -180,7 +180,8 @@ const Dashboard = () => {
         <Link to='/update-email'><Button size='sm'>Update Email/Password</Button></Link>
       </LoginDiv>
       <div>
-        <form onSubmit={HandleEditFormSubmit}>
+        <form id='inner-form' />
+        <form id='outer-form' onSubmit={HandleEditFormSubmit}>
           <Table size='sm'>
             <thead>
               <tr>
@@ -192,6 +193,37 @@ const Dashboard = () => {
               </tr>
             </thead>
             <tbody>
+            <tr>
+                <td><InputGroup size='sm'><FormControl
+                  form='inner-form'
+                  type="text"
+                  name="fullName"
+                  required="required"
+                  placeholder="Enter a name..."
+                  onChange={handleAddFormChange} /></InputGroup></td>
+                <td><InputGroup size='sm'><FormControl
+                  form='inner-form'
+                  type="text"
+                  name="address"
+                  required="required"
+                  placeholder="Enter an address..."
+                  onChange={handleAddFormChange} /></InputGroup></td>
+                <td><InputGroup size='sm'><FormControl
+                  form='inner-form'
+                  type="text"
+                  name="phoneNumber"
+                  required="required"
+                  placeholder="Enter a phone number..."
+                  onChange={handleAddFormChange} /></InputGroup></td>
+                <td><InputGroup size='sm'><FormControl
+                  form='inner-form'
+                  type="email"
+                  name="email"
+                  required="required"
+                  placeholder="Enter an email..."
+                  onChange={handleAddFormChange} /></InputGroup></td>
+                <td><Button form='inner-form' type="reset" size='sm' variant='primary' onClick={handleAddFormSubmit}>Add</Button></td>
+              </tr>
               {contacts.map((contact) =>
                 <Fragment key={contact.id}>
                   {
@@ -203,40 +235,6 @@ const Dashboard = () => {
               )}
             </tbody>
           </Table>
-        </form>
-      </div>
-
-      <div>
-        <h5>Add a Contact</h5>
-        <form>
-          <InputGroup size='sm'>
-            <FormControl
-              type="text"
-              name="fullName"
-              required="required"
-              placeholder="Enter a name..."
-              onChange={handleAddFormChange} />
-            <FormControl
-              type="text"
-              name="address"
-              required="required"
-              placeholder="Enter an address..."
-              onChange={handleAddFormChange} />
-            <FormControl
-              type="text"
-              name="phoneNumber"
-              required="required"
-              placeholder="Enter a phone number..."
-              onChange={handleAddFormChange} />
-            <FormControl
-              type="email"
-              name="email"
-              required="required"
-              placeholder="Enter an email..."
-              onChange={handleAddFormChange} />
-
-            <Button type="reset" variant='primary' onClick={handleAddFormSubmit}>Add</Button>
-          </InputGroup>
         </form>
       </div>
     </>
