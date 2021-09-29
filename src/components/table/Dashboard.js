@@ -195,35 +195,53 @@ const Dashboard = () => {
             </thead>
             <tbody>
               <tr>
-                <td><InputGroup size='sm'><FormControl
-                  form='inner-form'
-                  type="text"
-                  name="fullName"
-                  required="required"
-                  placeholder="Enter a name..."
-                  onChange={handleAddFormChange} /></InputGroup></td>
-                <td><InputGroup size='sm'><FormControl
-                  form='inner-form'
-                  type="text"
-                  name="address"
-                  required="required"
-                  placeholder="Enter an address..."
-                  onChange={handleAddFormChange} /></InputGroup></td>
-                <td><InputGroup size='sm'><FormControl
-                  form='inner-form'
-                  type="text"
-                  name="phoneNumber"
-                  required="required"
-                  placeholder="Enter a phone number..."
-                  onChange={handleAddFormChange} /></InputGroup></td>
-                <td><InputGroup size='sm'><FormControl
-                  form='inner-form'
-                  type="email"
-                  name="email"
-                  required="required"
-                  placeholder="Enter an email..."
-                  onChange={handleAddFormChange} /></InputGroup></td>
-                <td><Button form='inner-form' type="reset" size='sm' variant='primary' onClick={handleAddFormSubmit}>Add</Button></td>
+                <td>
+                  <InputGroup size='sm'>
+                    <FormControl
+                      form='inner-form'
+                      type="text"
+                      name="fullName"
+                      required="required"
+                      placeholder="Enter a name..."
+                      onChange={handleAddFormChange} />
+                  </InputGroup>
+                </td>
+                <td>
+                  <InputGroup size='sm'>
+                    <FormControl
+                      form='inner-form'
+                      type="text"
+                      name="address"
+                      required="required"
+                      placeholder="Enter an address..."
+                      onChange={handleAddFormChange} />
+                  </InputGroup>
+                </td>
+                <td>
+                  <InputGroup size='sm'>
+                    <FormControl
+                      form='inner-form'
+                      type="text"
+                      name="phoneNumber"
+                      required="required"
+                      placeholder="Enter a phone number..."
+                      onChange={handleAddFormChange} />
+                  </InputGroup>
+                </td>
+                <td>
+                  <InputGroup size='sm'>
+                    <FormControl
+                      form='inner-form'
+                      type="email"
+                      name="email"
+                      required="required"
+                      placeholder="Enter an email..."
+                      onChange={handleAddFormChange} />
+                  </InputGroup>
+                </td>
+                <td>
+                  <Button form='inner-form' type="reset" size='sm' variant='primary' onClick={handleAddFormSubmit}>Add</Button>
+                </td>
               </tr>
               {contacts.map((contact) =>
                 <Fragment key={contact.id}>
