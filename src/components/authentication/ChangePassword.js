@@ -4,9 +4,10 @@ import { Link, useHistory } from 'react-router-dom'
 import { AppButton, LoginDiv, LoginDivContainer, LoginH2, LoginInput } from '../styles/App.style'
 import { Alert } from 'react-bootstrap'
 
-export default function UpdateEmail() {
-    const emailRef = useRef()
-    const { currentUser, updatedEmail } = useAuth()
+export default function ChangePassword() {
+    const passwordRef = useRef()
+    const passwordConfirmRef = useRef()
+    const { updatedPassword } = useAuth()
     const [error, setError] = useState('')
     const [loading, setLoading] = useState(false)
     const history = useHistory()
@@ -14,11 +15,15 @@ export default function UpdateEmail() {
     function handleSubmit(event) {
         event.preventDefault()
 
+        if (passwordRef.current.value !== passwordConfirmRef.current.value) {
+            return setError('Passwords do not match')
+        }
+
         const promises = []
         setLoading(true)
         setError('')
-        if (emailRef.current.value !== currentUser.email) {
-            promises.push(updatedEmail(emailRef.current.value))
+        if (passwordRef.current.value) {
+            promises.push(updatedPassword(passwordRef.current.value))
         }
 
         Promise.all(promises).then(() => {
@@ -31,14 +36,17 @@ export default function UpdateEmail() {
 
     return (
         <LoginDivContainer>
-        <LoginDiv><LoginH2>Update Email</LoginH2></LoginDiv>
+        <LoginDiv><LoginH2>Change Password</LoginH2></LoginDiv>
         {error && <Alert variant='danger'>{error}</Alert>}
             <LoginDiv>
                 <form onSubmit={handleSubmit}>
-                    <fieldset id='email'>
-                        <LoginInput type='email' ref={emailRef} placeholder='Enter Email' required defaultValue={currentUser.email} />
+                    <fieldset id='password'>
+                        <LoginInput type='password' ref={passwordRef} placeholder='Enter New Password' />
                     </fieldset>
-                    <AppButton disabled={loading} type='submit'>Update Email</AppButton>
+                    <fieldset id='password-confirm'>
+                        <LoginInput type='password' ref={passwordConfirmRef} placeholder='Confirm New Password' />
+                    </fieldset>
+                    <AppButton disabled={loading} type='submit'>Change Password</AppButton>
                 </form>
             </LoginDiv>
             <br/>

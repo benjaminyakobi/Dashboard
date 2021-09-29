@@ -7,13 +7,9 @@ import Dashboard from './table/Dashboard'
 import PrivateRoute from "./routing/PrivateRoute"
 import ForgotPassword from "./authentication/ForgotPassword"
 import UpdateEmail from "./authentication/UpdateEmail"
+import ChangePassword from "./authentication/ChangePassword"
 import { AppDiv } from './styles/App.style'
-//TODO: Styling: App (application container)
-//TODO: Styling: Login
-//TODO: Styling: Signup
-//TODO: Styling: ForgotPassword
-//TODO: Styling: UpdateEmail
-//TODO: Styling: Dashboard
+
 const App = () => {
   return (
     <AuthProvider>
@@ -26,6 +22,7 @@ const App = () => {
                 <Route exact path='/' component={Login} />
                 <Route path='/forgot-password' component={ForgotPassword} />
                 <Route path='/update-email' component={UpdateEmail} />
+                <Route path='/update-password' component={ChangePassword} />
               </Switch>
             </AuthProvider>
           </Router>
