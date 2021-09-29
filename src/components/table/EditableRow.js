@@ -48,8 +48,10 @@ const EditableRow = ({ addFormData, handleEditFormChange, handleCancelClick }) =
                         onChange={handleEditFormChange} />
                 </InputGroup>
             </td>
-            <td>
+            <td style={{width:'10px'}}>
                 <Button type='submit' size='sm' variant='success'>Save</Button> {' '}
+            </td>
+            <td style={{width:'10px', paddingRight:'10px'}}>
                 <Button type='button' size='sm' variant='danger' onClick={handleCancelClick}>Cancel</Button>
             </td>
         </tr>
