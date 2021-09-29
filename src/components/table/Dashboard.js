@@ -176,8 +176,9 @@ const Dashboard = () => {
   return (
     <>
       <LoginDiv>
-        <Button variant='danger' size='sm' onClick={handleLogout}>Logout from {currentUser.email}</Button>
-        <Link to='/update-email'><Button size='sm'>Update Email/Password</Button></Link>
+        <Button variant='danger' style={{ marginBottom: '0.5rem', marginTop: '0.5rem', marginRight: '0.5rem' }} size='sm' onClick={handleLogout} >Logout from {currentUser.email}</Button>
+        <Link to='/update-email'><Button style={{ marginBottom: '0.5rem', marginTop: '0.5rem', marginRight: '0.5rem' }} size='sm'>Update Email</Button></Link>
+        <Link to='/update-password'><Button style={{ marginBottom: '0.5rem', marginTop: '0.5rem', marginRight: '0.5rem' }} size='sm'>Update Password</Button></Link>
       </LoginDiv>
       <div>
         <form id='inner-form' />
@@ -193,7 +194,7 @@ const Dashboard = () => {
               </tr>
             </thead>
             <tbody>
-            <tr>
+              <tr>
                 <td><InputGroup size='sm'><FormControl
                   form='inner-form'
                   type="text"
