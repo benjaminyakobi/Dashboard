@@ -56,16 +56,15 @@ const Dashboard = () => {
   /* ADDING DATA TO FIREBASE RTDB */
   const handleAddFormSubmit = (event) => {
     event.preventDefault()
+    //Inserting new object to Firebase-RT-DB
+    const newChildRef = push(listsRef); //Generating new child under 'Lists'
     const newContact = {
-      id: nanoid(), //Generates an id
+      id: newChildRef.key, //Settings here the generated id after push to listsRef
       fullName: addFormData.fullName,
       address: addFormData.address,
       phoneNumber: addFormData.phoneNumber,
       email: addFormData.email
     }
-
-    //Inserting new object to Firebase-RT-DB
-    const newChildRef = push(listsRef); //Generating new child under 'Lists'
     set(newChildRef, newContact); //Setting new object into the new child (newChildRef)
 
     onValue(listsRef, (snapshot) => {
