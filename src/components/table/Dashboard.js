@@ -1,4 +1,3 @@
-import { nanoid } from 'nanoid'
 import React, { useState, useEffect, Fragment } from 'react'
 import { db } from "../../initFirebase"
 import { ref, push, set, update, onValue, get } from "firebase/database"
@@ -8,6 +7,7 @@ import ReadOnlyRow from "./ReadOnlyRow"
 import EditableRow from "./EditableRow"
 import { Table, Button, InputGroup, FormControl } from 'react-bootstrap'
 import { LoginDiv } from '../styles/App.style'
+import { ModalList } from './ModalList'
 
 
 const Dashboard = () => {
@@ -170,11 +170,13 @@ const Dashboard = () => {
         else { console.log('No data available') }
       }).catch(error => { console.log(error) })
   }
-
+  const [showModal, setShowModal] = useState(false)
 
   return (
     <>
+      {showModal ? <ModalList showModal={showModal} setShowModal={setShowModal} /> : null}
       <LoginDiv>
+        <Button style={{ marginBottom: '0.5rem', marginTop: '0.5rem', marginRight: '0.5rem' }} onClick={() => setShowModal(true)} size='sm'>Modal</Button>
         <Button variant='danger' style={{ marginBottom: '0.5rem', marginTop: '0.5rem', marginRight: '0.5rem' }} size='sm' onClick={handleLogout} >Logout from {currentUser.email}</Button>
         <Link to='/update-email'><Button style={{ marginBottom: '0.5rem', marginTop: '0.5rem', marginRight: '0.5rem' }} size='sm'>Update Email</Button></Link>
         <Link to='/update-password'><Button style={{ marginBottom: '0.5rem', marginTop: '0.5rem', marginRight: '0.5rem' }} size='sm'>Update Password</Button></Link>
