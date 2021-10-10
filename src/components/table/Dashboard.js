@@ -20,7 +20,7 @@ const Dashboard = () => {
   const [editContactId, setEditContactId] = useState(null); //For editing rows
   const [selectedDateTime, setSelectedDateTime] = useState(new Date());
   const [addFormData, setAddFormData] = useState({
-    dateTime: selectedDateTime,
+    dateTime: JSON.stringify(selectedDateTime),
     fullName: "",
     address: "",
     phoneNumber: "",
@@ -83,7 +83,6 @@ const Dashboard = () => {
 
   const handleAddFormChange = (event) => {
     event.preventDefault();
-
     const fieldName = event.target.getAttribute("name");
     const fieldValue = event.target.value;
 
@@ -256,12 +255,15 @@ const Dashboard = () => {
               <tr>
                 <td>
                   <DatePicker
-                    selected={selectedDateTime}
-                    onChange={(dateTime) => setSelectedDateTime(dateTime)}
-                    showTimeSelect
-                    dateFormat="MMMM d, yyyy hh:mm aa"
                     form="inner-form"
                     name="dateTime"
+                    dateFormat="MMMM d, yyyy hh:mm aa"
+                    selected={selectedDateTime}
+                    onChange={(dateTime) => {
+                      setSelectedDateTime(dateTime);
+                      // handleAddFormChange(new Event("date-change"));
+                    }}
+                    showTimeSelect
                   />
                 </td>
                 <td>

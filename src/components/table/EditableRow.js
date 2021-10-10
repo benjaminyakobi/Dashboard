@@ -15,11 +15,11 @@ const EditableRow = ({
     <tr>
       <td>
         <DatePicker
+          name="dateTime"
+          dateFormat="MMMM d, yyyy hh:mm aa"
           selected={selectedDateTime}
           onChange={(dateTime) => setSelectedDateTime(dateTime)}
           showTimeSelect
-          dateFormat="MMMM d, yyyy hh:mm aa"
-          name="dateTime"
         />
       </td>
       <td>
