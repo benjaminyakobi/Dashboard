@@ -1,0 +1,13 @@
+.datepicker-style {
+  border-radius: 4px;
+  border: 1px;
+  height: 30px;
+  width: 100%;
+  font-size: 14px;
+  padding: 7px;
+}
+input:focus {
+  outline: none !important;
+  border-color: #6899ce;
+  box-shadow: 0 0 10px #6899ce;
+}
