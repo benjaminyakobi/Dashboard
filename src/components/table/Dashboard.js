@@ -262,7 +262,6 @@ const Dashboard = () => {
                     selected={selectedDateTime}
                     onChange={(dateTime) => {
                       setSelectedDateTime(dateTime);
-                      // handleAddFormChange(new Event("date-change"));
                     }}
                     showTimeSelect
                   />
