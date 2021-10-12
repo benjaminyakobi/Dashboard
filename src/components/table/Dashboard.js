@@ -61,7 +61,7 @@ const Dashboard = () => {
     const newChildRef = push(listsRef); //Generating new child under 'Lists'
     const newContact = {
       id: newChildRef.key, //Settings here the generated id after push to listsRef
-      dateTime: addFormData.dateTime,
+      dateTime: JSON.stringify(selectedDateTime),
       fullName: addFormData.fullName,
       address: addFormData.address,
       phoneNumber: addFormData.phoneNumber,
@@ -99,7 +99,7 @@ const Dashboard = () => {
     //Updated contact information
     const updatedContact = {
       id: editContactId,
-      dateTime: addFormData.dateTime,
+      dateTime: JSON.stringify(selectedDateTime),
       fullName: addFormData.fullName,
       address: addFormData.address,
       phoneNumber: addFormData.phoneNumber,
@@ -145,7 +145,7 @@ const Dashboard = () => {
     setEditContactId(contact.id);
 
     const formData = {
-      dateTime: contact.dateTime,
+      dateTime: JSON.stringify(selectedDateTime),
       fullName: contact.fullName,
       address: contact.address,
       phoneNumber: contact.phoneNumber,
