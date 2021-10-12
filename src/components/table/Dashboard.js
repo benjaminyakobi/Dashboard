@@ -10,6 +10,7 @@ import { LoginDiv } from "../styles/App.style";
 import { ModalList } from "./ModalList";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import "../../App.css";
 
 const Dashboard = () => {
   const { currentUser, logout } = useAuth(); //For firebase authentication
@@ -19,8 +20,9 @@ const Dashboard = () => {
   const [contacts, setContacts] = useState([]); //For rendeting contacts that fetched from firebase
   const [editContactId, setEditContactId] = useState(null); //For editing rows
   const [selectedDateTime, setSelectedDateTime] = useState(new Date());
+  const [mainDate, setMainDate] = useState(new Date());
   const [addFormData, setAddFormData] = useState({
-    dateTime: JSON.stringify(selectedDateTime),
+    dateTime: mainDate.toISOString(),
     fullName: "",
     address: "",
     phoneNumber: "",
@@ -41,7 +43,7 @@ const Dashboard = () => {
         console.log(error);
       }
     });
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   async function handleLogout() {
@@ -62,7 +64,7 @@ const Dashboard = () => {
     const newChildRef = push(listsRef); //Generating new child under 'Lists'
     const newContact = {
       id: newChildRef.key, //Settings here the generated id after push to listsRef
-      dateTime: JSON.stringify(selectedDateTime),
+      dateTime: selectedDateTime.toISOString(),
       fullName: addFormData.fullName,
       address: addFormData.address,
       phoneNumber: addFormData.phoneNumber,
@@ -80,6 +82,7 @@ const Dashboard = () => {
         console.log("No data available");
       }
     });
+    setMainDate(new Date());
   };
 
   const handleAddFormChange = (event) => {
@@ -100,7 +103,7 @@ const Dashboard = () => {
     //Updated contact information
     const updatedContact = {
       id: editContactId,
-      dateTime: JSON.stringify(selectedDateTime),
+      dateTime: selectedDateTime.toISOString(),
       fullName: addFormData.fullName,
       address: addFormData.address,
       phoneNumber: addFormData.phoneNumber,
@@ -146,7 +149,7 @@ const Dashboard = () => {
     setEditContactId(contact.id);
 
     const formData = {
-      dateTime: JSON.stringify(selectedDateTime),
+      dateTime: selectedDateTime.toISOString(),
       fullName: contact.fullName,
       address: contact.address,
       phoneNumber: contact.phoneNumber,
@@ -258,12 +261,15 @@ const Dashboard = () => {
                   <DatePicker
                     form="inner-form"
                     name="dateTime"
-                    dateFormat="MMMM d, yyyy hh:mm aa"
-                    selected={selectedDateTime}
+                    selected={mainDate}
                     onChange={(dateTime) => {
                       setSelectedDateTime(dateTime);
+                      setMainDate(dateTime);
                     }}
                     showTimeSelect
+                    timeFormat="HH:mm"
+                    dateFormat="dd.MM.yyyy, HH:mm"
+                    className="datepicker-style"
                   />
                 </td>
                 <td>

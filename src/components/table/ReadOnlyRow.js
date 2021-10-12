@@ -4,7 +4,12 @@ import { Button } from "react-bootstrap";
 function ReadOnlyRow({ contact, handleEditClick, handleDeleteClick }) {
   return (
     <tr>
-      <td>{contact.dateTime}</td>
+      <td>
+        {new Date(contact.dateTime).toLocaleString("he-IL", {
+          dateStyle: "short",
+          timeStyle: "short",
+        })}
+      </td>
       <td>{contact.fullName}</td>
       <td>{contact.address}</td>
       <td>{contact.phoneNumber}</td>
