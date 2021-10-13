@@ -59,7 +59,7 @@ const Dashboard = () => {
 
   /* ADDING DATA TO FIREBASE RTDB */
   const handleAddFormSubmit = (event) => {
-    event.preventDefault();
+    // event.preventDefault();
     //Inserting new object to Firebase-RT-DB
     const newChildRef = push(listsRef); //Generating new child under 'Lists'
     const newContact = {
@@ -83,16 +83,25 @@ const Dashboard = () => {
       }
     });
     setMainDate(new Date());
+    setSelectedDateTime(new Date());
+    setAddFormData({
+      dateTime: mainDate.toISOString(),
+      fullName: "",
+      address: "",
+      phoneNumber: "",
+      email: "",
+    });
   };
 
   const handleAddFormChange = (event) => {
     event.preventDefault();
+    
     const fieldName = event.target.getAttribute("name");
     const fieldValue = event.target.value;
-
+    
     const newFormData = { ...addFormData };
     newFormData[fieldName] = fieldValue;
-
+    
     setAddFormData(newFormData);
   };
 
