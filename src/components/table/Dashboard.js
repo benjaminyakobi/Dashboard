@@ -19,6 +19,7 @@ const Dashboard = () => {
   const listsRef = ref(db, `Lists/${currentUser.uid}`); //Getting a reference to 'Lists' in Firebase-RT-DB
   const [contacts, setContacts] = useState([]); //For rendeting contacts that fetched from firebase
   const [editContactId, setEditContactId] = useState(null); //For editing rows
+  const [showModal, setShowModal] = useState(false);
   const [selectedDateTime, setSelectedDateTime] = useState(new Date());
   const [mainDate, setMainDate] = useState(new Date());
   const [addFormData, setAddFormData] = useState({
@@ -29,8 +30,19 @@ const Dashboard = () => {
     email: "",
   });
 
-  /* FIREBASE REALTIME DATABASE */
-  //Loading data from Firebase-Realtime-Database
+  /* FIREBASE AUTHENTICATION (AuthContext) */
+  async function handleLogout() {
+    setError("");
+    try {
+      await logout();
+      history.push("/");
+    } catch {
+      setError("Failed to log out");
+      console.log(error);
+    }
+  }
+
+  /* Loading data from Firebase-Realtime-Database */
   useEffect(() => {
     onValue(listsRef, (snapshot) => {
       const jsonObject = snapshot.val(); //Getting each child value under 'Lists' as a json object
@@ -45,17 +57,6 @@ const Dashboard = () => {
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  async function handleLogout() {
-    setError("");
-    try {
-      await logout();
-      history.push("/");
-    } catch {
-      setError("Failed to log out");
-      console.log(error);
-    }
-  }
 
   /* ADDING DATA TO FIREBASE RTDB */
   const handleAddFormSubmit = (event) => {
@@ -92,18 +93,6 @@ const Dashboard = () => {
     });
   };
 
-  const handleAddFormChange = (event) => {
-    event.preventDefault();
-
-    const fieldName = event.target.getAttribute("name");
-    const fieldValue = event.target.value;
-
-    const newFormData = { ...addFormData };
-    newFormData[fieldName] = fieldValue;
-
-    setAddFormData(newFormData);
-  };
-
   /* EDDITING DATA IN FIREBASE RTDB */
   const HandleEditFormSubmit = (event) => {
     event.preventDefault();
@@ -138,40 +127,8 @@ const Dashboard = () => {
       });
 
     setEditContactId(null);
-    setSelectedDateTime(new Date())
+    setSelectedDateTime(new Date());
   };
-
-  const handleEditFormChange = (event) => {
-    event.preventDefault();
-
-    const fieldName = event.target.getAttribute("name");
-    const fieldValue = event.target.value;
-
-    const newFormData = { ...addFormData };
-    newFormData[fieldName] = fieldValue;
-
-    setAddFormData(newFormData);
-  };
-
-  const handleEditClick = (event, contact) => {
-    event.preventDefault();
-    setEditContactId(contact.id);
-    setSelectedDateTime(new Date(contact.dateTime))
-    const formData = {
-      dateTime: contact.dateTime,
-      fullName: contact.fullName,
-      address: contact.address,
-      phoneNumber: contact.phoneNumber,
-      email: contact.email,
-    };
-
-    setAddFormData(formData);
-  };
-
-  const handleCancelClick = () => {
-    setEditContactId(null);
-  };
-
 
   /* DELETE DATA FROM FIREBASE RTDB */
   const handleDeleteClick = (contactId) => {
@@ -195,7 +152,49 @@ const Dashboard = () => {
         console.log(error);
       });
   };
-  const [showModal, setShowModal] = useState(false);
+
+  const handleAddFormChange = (event) => {
+    event.preventDefault();
+
+    const fieldName = event.target.getAttribute("name");
+    const fieldValue = event.target.value;
+
+    const newFormData = { ...addFormData };
+    newFormData[fieldName] = fieldValue;
+
+    setAddFormData(newFormData);
+  };
+
+  const handleEditFormChange = (event) => {
+    event.preventDefault();
+
+    const fieldName = event.target.getAttribute("name");
+    const fieldValue = event.target.value;
+
+    const newFormData = { ...addFormData };
+    newFormData[fieldName] = fieldValue;
+
+    setAddFormData(newFormData);
+  };
+
+  const handleEditClick = (event, contact) => {
+    event.preventDefault();
+    setEditContactId(contact.id);
+    setSelectedDateTime(new Date(contact.dateTime));
+    const formData = {
+      dateTime: contact.dateTime,
+      fullName: contact.fullName,
+      address: contact.address,
+      phoneNumber: contact.phoneNumber,
+      email: contact.email,
+    };
+
+    setAddFormData(formData);
+  };
+
+  const handleCancelClick = () => {
+    setEditContactId(null);
+  };
 
   return (
     <>
