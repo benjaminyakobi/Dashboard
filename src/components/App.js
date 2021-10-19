@@ -10,6 +10,12 @@ import UpdateEmail from "./authentication/UpdateEmail"
 import ChangePassword from "./authentication/ChangePassword"
 import { AppDiv } from './styles/App.style'
 
+//TODO: useContext + useReducer: preventing prop drilling (Redux equivallents)
+//TODO: Render-Props pattern
+//TODO: Higher-Order-Components (HOC)
+//TODO: Component Composition
+//TODO: Pure Components
+
 const App = () => {
   return (
     <AuthProvider>
