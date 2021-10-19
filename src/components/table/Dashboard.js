@@ -83,7 +83,6 @@ const Dashboard = () => {
       }
     });
     setMainDate(new Date());
-    setSelectedDateTime(new Date());
     setAddFormData({
       dateTime: mainDate.toISOString(),
       fullName: "",
@@ -95,13 +94,13 @@ const Dashboard = () => {
 
   const handleAddFormChange = (event) => {
     event.preventDefault();
-    
+
     const fieldName = event.target.getAttribute("name");
     const fieldValue = event.target.value;
-    
+
     const newFormData = { ...addFormData };
     newFormData[fieldName] = fieldValue;
-    
+
     setAddFormData(newFormData);
   };
 
@@ -139,6 +138,7 @@ const Dashboard = () => {
       });
 
     setEditContactId(null);
+    setSelectedDateTime(new Date())
   };
 
   const handleEditFormChange = (event) => {
@@ -156,9 +156,9 @@ const Dashboard = () => {
   const handleEditClick = (event, contact) => {
     event.preventDefault();
     setEditContactId(contact.id);
-
+    setSelectedDateTime(new Date(contact.dateTime))
     const formData = {
-      dateTime: selectedDateTime.toISOString(),
+      dateTime: contact.dateTime,
       fullName: contact.fullName,
       address: contact.address,
       phoneNumber: contact.phoneNumber,
@@ -171,6 +171,7 @@ const Dashboard = () => {
   const handleCancelClick = () => {
     setEditContactId(null);
   };
+
 
   /* DELETE DATA FROM FIREBASE RTDB */
   const handleDeleteClick = (contactId) => {
