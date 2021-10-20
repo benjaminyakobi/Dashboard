@@ -4,6 +4,7 @@ import { Button } from "react-bootstrap";
 function ReadOnlyRow({ contact, handleEditClick, handleDeleteClick }) {
   return (
     <tr>
+      <td>Modal</td>
       <td>
         {new Date(contact.dateTime).toLocaleString("he-IL", {
           dateStyle: "short",

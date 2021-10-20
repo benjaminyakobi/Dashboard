@@ -13,6 +13,7 @@ const EditableRow = ({
 }) => {
   return (
     <tr>
+      <td>Modal</td>
       <td>
         <DatePicker
           name="dateTime"

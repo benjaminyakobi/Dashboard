@@ -12,6 +12,9 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import "../../App.css";
 
+//TODO: 1. Modal
+//TODO: 2. Table Columns
+
 const Dashboard = () => {
   const { currentUser, logout } = useAuth(); //For firebase authentication
   const [error, setError] = useState(""); //For errors
@@ -202,7 +205,7 @@ const Dashboard = () => {
         <ModalList showModal={showModal} setShowModal={setShowModal} />
       ) : null}
       <LoginDiv>
-        <Button
+        {/* <Button
           style={{
             marginBottom: "0.5rem",
             marginTop: "0.5rem",
@@ -212,7 +215,7 @@ const Dashboard = () => {
           size="sm"
         >
           Modal
-        </Button>
+        </Button> */}
         <Button
           variant="danger"
           style={{
@@ -256,6 +259,7 @@ const Dashboard = () => {
           <Table size="sm">
             <thead>
               <tr>
+                <th>List</th>
                 <th>Date & Time</th>
                 <th>Name</th>
                 <th>Address</th>
@@ -266,6 +270,19 @@ const Dashboard = () => {
             </thead>
             <tbody>
               <tr>
+                <td>
+                  <Button
+                    style={{
+                      marginBottom: "0.0rem",
+                      marginTop: "0.0rem",
+                      marginRight: "0.0rem",
+                    }}
+                    onClick={() => setShowModal(true)}
+                    size="sm"
+                  >
+                    Modal
+                  </Button>
+                </td>
                 <td>
                   <DatePicker
                     form="inner-form"
