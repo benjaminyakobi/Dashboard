@@ -14,6 +14,7 @@ import "../../App.css";
 
 //TODO: 1. Modal
 //TODO: 2. Table Columns
+//TODO: 3. Products has been uploaded to firebase (use them in the modal)
 
 const Dashboard = () => {
   const { currentUser, logout } = useAuth(); //For firebase authentication
