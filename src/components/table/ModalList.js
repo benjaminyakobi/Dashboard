@@ -12,7 +12,7 @@ export const ModalList = ({ showModal, setShowModal }) => {
         <Modal.Title>Modal title</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <Tabs
+        <Tabs transition={false}
           defaultActiveKey="home"
           id="tabs"
           className="mb-3"
