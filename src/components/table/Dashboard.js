@@ -20,7 +20,7 @@ const Dashboard = () => {
   const { currentUser, logout } = useAuth(); //For firebase authentication
   const [error, setError] = useState(""); //For errors
   const history = useHistory(); //For routing between components
-  const listsRef = ref(db, `Lists/${currentUser.uid}`); //Getting a reference to 'Lists' in Firebase-RT-DB
+  const usersRef = ref(db, `Users/${currentUser.uid}`); //Getting a reference to 'Users' in Firebase-RT-DB
   const [contacts, setContacts] = useState([]); //For rendeting contacts that fetched from firebase
   const [editContactId, setEditContactId] = useState(null); //For editing rows
   const [showModal, setShowModal] = useState(false);
@@ -48,8 +48,8 @@ const Dashboard = () => {
 
   /* Loading data from Firebase-Realtime-Database */
   useEffect(() => {
-    onValue(listsRef, (snapshot) => {
-      const jsonObject = snapshot.val(); //Getting each child value under 'Lists' as a json object
+    onValue(usersRef, (snapshot) => {
+      const jsonObject = snapshot.val(); //Getting each child value under 'Users' as a json object
       try {
         setError("");
         const listObject = Object.values(jsonObject); //Convert a json object to a list of jsons
@@ -66,9 +66,9 @@ const Dashboard = () => {
   const handleAddFormSubmit = (event) => {
     // event.preventDefault();
     //Inserting new object to Firebase-RT-DB
-    const newChildRef = push(listsRef); //Generating new child under 'Lists'
+    const newChildRef = push(usersRef); //Generating new child under 'Users'
     const newContact = {
-      id: newChildRef.key, //Settings here the generated id after push to listsRef
+      id: newChildRef.key, //Settings here the generated id after push to usersRef
       dateTime: selectedDateTime.toISOString(),
       fullName: addFormData.fullName,
       address: addFormData.address,
@@ -77,9 +77,9 @@ const Dashboard = () => {
     };
     set(newChildRef, newContact); //Setting new object into the new child (newChildRef)
 
-    onValue(listsRef, (snapshot) => {
+    onValue(usersRef, (snapshot) => {
       if (snapshot.exists()) {
-        const jsonObject = snapshot.val(); //Getting each child value under 'Lists' as a json object
+        const jsonObject = snapshot.val(); //Getting each child value under 'Users' as a json object
         const listObject = Object.values(jsonObject); //Convert a json object to a list of jsons
         setContacts(listObject); //Updating state: 'contacts' using setContacts
       } else {
@@ -111,7 +111,7 @@ const Dashboard = () => {
       email: addFormData.email,
     };
 
-    get(listsRef)
+    get(usersRef)
       .then((snapshot) => {
         if (snapshot.exists()) {
           const jsonObject = snapshot.val();
@@ -119,7 +119,7 @@ const Dashboard = () => {
             if (value["id"] === editContactId) {
               const updates = {};
               updates[key] = updatedContact; //Set an updated contact
-              return update(listsRef, updates);
+              return update(usersRef, updates);
             }
           }
         } else {
@@ -136,7 +136,7 @@ const Dashboard = () => {
 
   /* DELETE DATA FROM FIREBASE RTDB */
   const handleDeleteClick = (contactId) => {
-    get(listsRef)
+    get(usersRef)
       .then((snapshot) => {
         if (snapshot.exists()) {
           const jsonObject = snapshot.val();
@@ -145,7 +145,7 @@ const Dashboard = () => {
               const updates = {};
               updates[key] = null; //Set to null to remove
               setEditContactId(null);
-              return update(listsRef, updates);
+              return update(usersRef, updates);
             }
           }
         } else {
