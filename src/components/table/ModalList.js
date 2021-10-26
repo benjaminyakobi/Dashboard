@@ -1,7 +1,7 @@
 import React from "react";
 import { Tabs, Tab, Modal } from "react-bootstrap";
 
-export const ModalList = ({ showModal, setShowModal }) => {
+export const ModalList = ({ showModal, setShowModal, products }) => {
   return (
     <Modal
       show={showModal}
@@ -24,7 +24,7 @@ export const ModalList = ({ showModal, setShowModal }) => {
             <div>Profile</div>
           </Tab>
           <Tab eventKey="contact" title="Contact">
-            <div>contact</div>
+            <div>Contact</div>
           </Tab>
         </Tabs>
       </Modal.Body>

@@ -223,7 +223,7 @@ const Dashboard = () => {
   return (
     <>
       {showModal ? (
-        <ModalList showModal={showModal} setShowModal={setShowModal} />
+        <ModalList showModal={showModal} setShowModal={setShowModal} products={products} />
       ) : null}
       <LoginDiv>
         {/* <Button
