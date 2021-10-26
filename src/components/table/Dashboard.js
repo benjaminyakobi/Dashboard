@@ -21,6 +21,8 @@ const Dashboard = () => {
   const [error, setError] = useState(""); //For errors
   const history = useHistory(); //For routing between components
   const usersRef = ref(db, `Users/${currentUser.uid}`); //Getting a reference to 'Users' in Firebase-RT-DB
+  const productsRef = ref(db, `Products`);
+  const [products, setProducts] = useState([]);
   const [contacts, setContacts] = useState([]); //For rendeting contacts that fetched from firebase
   const [editContactId, setEditContactId] = useState(null); //For editing rows
   const [showModal, setShowModal] = useState(false);
@@ -46,7 +48,7 @@ const Dashboard = () => {
     }
   }
 
-  /* Loading data from Firebase-Realtime-Database */
+  /* Loading users data from Firebase-Realtime-Database */
   useEffect(() => {
     onValue(usersRef, (snapshot) => {
       const jsonObject = snapshot.val(); //Getting each child value under 'Users' as a json object
@@ -59,6 +61,24 @@ const Dashboard = () => {
         console.log(error);
       }
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  /* Loading products data *once* from fb-rt-db */
+  useEffect(() => {
+    get(productsRef)
+      .then((snapshot) => {
+        if (snapshot.exists()) {
+          const jsonObject = snapshot.val();
+          const listObject = Object.values(jsonObject); //Convert a json object to a list of jsons
+          setProducts(listObject);
+        } else {
+          console.log("No data available");
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
